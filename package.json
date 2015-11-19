@@ -1,0 +1,38 @@
+{
+  "name": "reduxible-example",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "Example of The Universal Web Application based on Reduxible.",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pitzcarraldo/reduxible-example.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.7.0",
+    "babel": "^5.8.34",
+    "express": "^4.13.3",
+    "history": "^1.13.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.0",
+    "react-router": "^1.0.0",
+    "redux": "^3.0.4",
+    "redux-simple-router": "0.0.8"
+  },
+  "engines": {
+    "node": "4.2.2"
+  },
+  "devDependencies": {
+    "babel-core": "5.8.34",
+    "babel-loader": "^5.4.0",
+    "react-transform-catch-errors": "^1.0.0",
+    "react-transform-hmr": "^1.0.1",
+    "redux-devtools": "^3.0.0-beta-3",
+    "redux-devtools-dock-monitor": "^1.0.0-beta-3",
+    "redux-devtools-log-monitor": "^1.0.0-beta-3",
+    "webpack": "^1.12.6",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.5.0"
+  }
+}
