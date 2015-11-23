@@ -16,11 +16,13 @@ export default function httpClientMiddleware(httpClient) {
         .then(response => next({
           ...rest,
           response: response.data,
-          type: SUCCESS}))
+          type: SUCCESS
+        }))
         .catch(error => next({
           ...rest,
           error: error.data,
-          type: FAILURE}));
+          type: FAILURE
+        }));
     };
   };
 }
