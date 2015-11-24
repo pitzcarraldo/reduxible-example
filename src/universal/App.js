@@ -1,7 +1,8 @@
-import Html from './views/Html';
-import Routes from './views/layouts/Routes';
 import Reduxible from '../libs/Reduxible';
-import middleware from '../universal/middlewares'
+import StoreFactory from '../libs/StoreFactory';
+import Html from './Html';
+import Routes from './Routes';
+import middleware from './middleware/index';
 
 export default class App extends Reduxible {
   constructor(config) {
@@ -9,7 +10,7 @@ export default class App extends Reduxible {
       config,
       container: Html,
       routes: Routes,
-      middleware: middleware
+      storeFactory: new StoreFactory({config, middleware})
     });
   }
 }

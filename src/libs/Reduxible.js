@@ -2,25 +2,25 @@ import React from 'react';
 import Location from 'react-router/lib/Location';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import ReduxibleRouter from './ReduxibleRouter';
-import StoreFactory from './StoreFactory';
 
 export default class Reduxible {
   constructor(options = {}) {
     this.config = options.config;
     this.contanier = options.contanier;
     this.routes = options.routes;
-    this.storeFactory = new StoreFactory({
-      config: this.config,
-      apiHost: options.apiHost
-    });
+    this.storeFactory = options.storeFactory;
+  }
+
+  render() {
+
   }
 
   serverRender(req, res) {
     const location = new Location(req.path, req.query);
-    const store = this.storeFactory.getStore(req);
+    const store = this.storeFactory.createStore(req);
     const routes = this.routes(store);
     const router = new ReduxibleRouter(routes);
-    const Html = this.baseMarkup;
+    const Html = this.contanier;
 
     if (this.isDevelopment) {
       // Do not cache webpack stats: the script file would change since
@@ -58,7 +58,7 @@ export default class Reduxible {
   clientRender(path, query, dest) {
     const location = new Location(path, query);
     const history = new BrowserHistory();
-    const store = this.storeFactory.getStore(null, window.__data);
+    const store = this.storeFactory.createStore(null, window.__data);
     const routes = this.routes(store);
     const router = new ReduxibleRouter(routes);
 
