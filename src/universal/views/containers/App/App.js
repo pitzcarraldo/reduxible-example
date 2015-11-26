@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import iOSTheme from 'reapp-ui/themes/ios/theme';
-import Theme from 'reapp-ui/helpers/Theme';
-import LayoutLeftNav from 'reapp-ui/views/LayoutLeftNav';
+import { connect } from 'react-redux';
+//import normalize from 'normalize.css';
+import Header from '../../components/Header';
 import Nav from '../../components/Nav';
+import Footer from '../../components/Footer';
 
 export default class App extends Component {
-  render() {
-    return (
-      <Theme {...iOSTheme}>
-        <LayoutLeftNav
-          side={Nav}
-          handle={handle}
-          draggable={false}>
-          {this.props.children}
-        </LayoutLeftNav>
-      </Theme>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Header />
+                <Nav />
+                    {this.props.children}
+                <Footer />
+            </div>
+        );
+    }
 }
