@@ -8,4 +8,4 @@ const config = new ReduxibleConfig({
 });
 const app = reduxible(config);
 
-app.client(document.getElementById('content'));
+app.client(window.__state, document.getElementById('content'));

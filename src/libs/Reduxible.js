@@ -10,6 +10,7 @@ export default class Reduxible {
   constructor(options = {}) {
     this.config = options.config;
     this.container = options.container;
+    this.errorContainer = options.errorContainer;
     this.routes = options.routes;
     this.storeFactory = new StoreFactory({...options});
   }
@@ -21,7 +22,10 @@ export default class Reduxible {
     return (req, res) => {
       router.route(req.originalUrl, (error, redirectLocation, component)=> {
         if (error) {
-          return res.status(500).end();
+          if(this.errorContainer) {
+            return res.status(500).end(this.render(this.errorContainer, store));
+          }
+          return res.status(500).end(error);
         } else if (redirectLocation) {
           return res.redirect(redirectLocation.pathname);
         } else {
@@ -36,8 +40,8 @@ export default class Reduxible {
     return '<!doctype html>\n' + ReactDOMServer.renderToString(<Html component={component} store={store}/>);
   }
 
-  client(dest) {
-    const store = this.storeFactory.createStore(window.__state);
+  client(initialState, dest) {
+    const store = this.storeFactory.createStore(initialState);
     const history = createBrowserHistory();
     const router = new ReduxibleRouter(this.routes, store, history).createRouter();
 
