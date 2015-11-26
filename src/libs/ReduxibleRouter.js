@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, RoutingContext, match } from 'react-router'
 import { Provider } from 'react-redux';
 import { syncReduxAndRouter } from 'redux-simple-router';
+import DevTools from './DevTools';
 
 export default class ReduxibleRouter {
   constructor(routes, store, history) {
@@ -12,7 +13,21 @@ export default class ReduxibleRouter {
   }
 
   createRouter() {
-    return this.getComponent(<Router history={this.history} routes={this.routes}/>);
+    return <Router history={this.history} routes={this.routes}/>;
+  }
+
+  render() {
+    return this.getComponent(this.createRouter());
+  }
+
+  renderDevTools() {
+    const router = this.createRouter();
+    return this.getComponent(
+      <div>
+        {router}
+        <DevTools/>
+      </div>
+    );
   }
 
   route(location, callback) {
@@ -29,7 +44,7 @@ export default class ReduxibleRouter {
     });
   }
 
-  getComponent(children){
+  getComponent(children) {
     return (
       <Provider store={this.store} key="provider">
         {children}

@@ -22,7 +22,7 @@ export default class Reduxible {
     return (req, res) => {
       router.route(req.originalUrl, (error, redirectLocation, component)=> {
         if (error) {
-          if(this.errorContainer) {
+          if (this.errorContainer) {
             return res.status(500).end(this.render(this.errorContainer, store));
           }
           return res.status(500).end(error);
@@ -43,8 +43,11 @@ export default class Reduxible {
   client(initialState, dest) {
     const store = this.storeFactory.createStore(initialState);
     const history = createBrowserHistory();
-    const router = new ReduxibleRouter(this.routes, store, history).createRouter();
-
-    ReactDOM.render(router, dest);
+    const router = new ReduxibleRouter(this.routes, store, history);
+    ReactDOM.render(router.render(), dest);
+    if(this.config.useDevTools()) {
+      window.React = React;
+      ReactDOM.render(router.renderDevTools(), dest);
+    }
   }
 }

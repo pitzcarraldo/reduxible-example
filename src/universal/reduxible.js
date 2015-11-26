@@ -3,7 +3,7 @@ import Html from './views/containers/Html';
 import Error from './views/containers/Error/Error';
 import routes from './routes';
 import middleware from './middleware/index';
-import reducer from './reducer/index';
+import reducer, { getPath } from './reducer/index';
 
 export default function reduxible(config) {
   return new Reduxible({
@@ -12,6 +12,7 @@ export default function reduxible(config) {
     errorContainer: Error,
     routes: routes,
     middleware: middleware,
-    reducer: reducer
+    reducer: reducer,
+    reducerPath: getPath()
   });
 }
