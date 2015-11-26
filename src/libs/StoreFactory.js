@@ -1,8 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { routeReducer }  from 'redux-simple-router';
+
 
 export default class StoreFactory {
   constructor(options) {
-    this.isDevelopment= options.config.isDevelopment();
+    this.isDevelopment = options.config.isDevelopment();
     this.useDevTools = options.config.useDevTools();
     this.reducer = options.reducer;
     this.middleware = options.middleware;
@@ -20,7 +22,7 @@ export default class StoreFactory {
     //}
 
     finalCreateStore = appliedMiddleware(createStore);
-    const reducer = combineReducers(this.reducer);
+    const reducer = combineReducers({...this.reducer, routing: routeReducer});
     const store = finalCreateStore(reducer, initialState);
 
     //if (this.isDevelopment && module.hot) {

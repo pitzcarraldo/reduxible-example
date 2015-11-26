@@ -1,8 +1,11 @@
-import App from '../universal/App';
+import reduxible from '../universal/reduxible';
 import ReduxibleConfig from '../libs/ReduxibleConfig';
 const config = new ReduxibleConfig({
-  server : true,
-
+  server : false,
+  universal: true,
+  development: false,
+  useDevTools: false
 });
+const app = reduxible(config);
 
-const app = new App(config);
+app.client(document.getElementById('content'));

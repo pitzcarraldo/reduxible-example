@@ -7,3 +7,7 @@ export default {
   info,
   widgets
 };
+
+export function getPath() {
+  return __dirname;
+}

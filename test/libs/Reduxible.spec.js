@@ -1,19 +1,28 @@
 import expect from 'expect';
 import Reduxible from '../../src/libs/Reduxible';
+import ReduxibleConfig from '../../src/libs/ReduxibleConfig';
+import Html from '../../src/universal/views/containers/Html';
+import routes from '../../src/universal/routes';
+import middleware from '../../src/universal/middleware/index';
+import reducer from '../../src/universal/reducer/index';
 
-describe('ReduxibleConfig', () => {
+
+describe('Reduxible', () => {
   it('returns false if development is undefined', () => {
     const config = new ReduxibleConfig({
-      devtools: true
+      server: true,
+      development: true,
+      devTools: true
     });
-    expect(config.useDevTools()).toBe(false);
-  });
-
-  it('returns false if development is false', () => {
-    const config = new ReduxibleConfig({
-      development: false,
-      devtools: true
+    const app = new Reduxible({
+      config,
+      container: Html,
+      routes: routes,
+      middleware: middleware,
+      reducer: reducer
     });
-    expect(config.useDevTools()).toBe(false);
+    app.server({originalUrl: '/'});
+    console.log(app);
+    expect(false).toBe(false);
   });
 });
