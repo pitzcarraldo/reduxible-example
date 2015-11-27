@@ -1,4 +1,4 @@
-import Reduxible from '../libs/Reduxible';
+import Reduxible from 'reduxible';
 import Html from './views/containers/Html';
 import Error from './views/containers/Error/Error';
 import routes from './routes';

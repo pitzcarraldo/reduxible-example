@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 //import normalize from 'normalize.css';
 import Header from '../../components/Header';
 import Nav from '../../components/Nav';

@@ -6,4 +6,4 @@ export default {
   auth,
   info,
   widgets
-}
+};

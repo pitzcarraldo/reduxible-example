@@ -38,7 +38,7 @@ export function isLoaded(globalState) {
 
 export function load() {
   return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    types: [ LOAD, LOAD_SUCCESS, LOAD_FAIL ],
     promise: (client) => client.get('/loadInfo')
   };
 }

@@ -3,7 +3,7 @@ import serveFavicon from 'serve-favicon';
 import serveStatic from 'serve-static';
 import compression from 'compression';
 import path from 'path';
-import ReduxibleConfig from '../libs/ReduxibleConfig';
+import { ReduxibleConfig } from 'reduxible';
 import config from '../../config/index';
 import reduxible from '../universal/reduxible';
 import devServer from '../../webpack/devServer';

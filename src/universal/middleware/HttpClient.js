@@ -2,7 +2,7 @@ const axios = require('axios');
 
 export default class HttpClient {
   constructor(host, req, isServer) {
-    ['get', 'post', 'put', 'patch', 'delete'].forEach(
+    [ 'get', 'post', 'put', 'patch', 'delete' ].forEach(
       (method) => {
         this[method] = (path, options) => {
           const request = {};

@@ -78,14 +78,14 @@ export function isLoaded(globalState) {
 
 export function load() {
   return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    types: [ LOAD, LOAD_SUCCESS, LOAD_FAIL ],
     promise: (client) => client.get('/loadAuth')
   };
 }
 
 export function login(name) {
   return {
-    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    types: [ LOGIN, LOGIN_SUCCESS, LOGIN_FAIL ],
     promise: (client) => client.post('/login', {
       data: {
         name: name
@@ -96,7 +96,7 @@ export function login(name) {
 
 export function logout() {
   return {
-    types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
+    types: [ LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL ],
     promise: (client) => client.get('/logout')
   };
 }

@@ -1,8 +1,11 @@
 {
   "name": "reduxible-example",
-  "version": "0.0.1-SNAPSHOT",
+  "version": "0.0.1-beta",
   "description": "Example of The Universal Web Application based on Reduxible.",
   "scripts": {
+    "lint": "eslint src test",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "check": "npm run lint && npm run test",
     "dev": "babel-node src/server/server.js",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js"
   },
@@ -18,25 +21,22 @@
     "babel-runtime": "^5.8.34",
     "compression": "^1.6.0",
     "express": "^4.13.3",
-    "history": "^1.13.1",
     "normalize.css": "^3.0.3",
     "query-string": "^3.0.0",
     "react": "^0.14.3",
     "react-addons-css-transition-group": "^0.14.3",
-    "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
     "redux": "^3.0.4",
     "redux-simple-router": "0.0.8",
+    "reduxible": "0.0.1-beta",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.0"
   },
-  "engines": {
-    "node": "4.2.2"
-  },
   "devDependencies": {
     "babel-core": "5.8.34",
+    "babel-eslint": "^4.1.0",
     "babel-loader": "^5.4.0",
     "babel-plugin-react-transform": "^1.1.1",
     "css-loader": "^0.23.0",
@@ -58,5 +58,8 @@
     "webpack": "^1.12.6",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0"
+  },
+  "engines": {
+    "node": "4.2.2"
   }
 }

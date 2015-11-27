@@ -1,5 +1,5 @@
 export default function httpClientMiddleware(httpClient) {
-  return ({dispatch, getState}) => {
+  return ({ dispatch, getState }) => {
     return next => action => {
       if (typeof action === 'function') {
         return action(dispatch, getState);
@@ -10,8 +10,8 @@ export default function httpClientMiddleware(httpClient) {
         return next(action);
       }
 
-      const [REQUEST, SUCCESS, FAILURE] = types;
-      next({...rest, type: REQUEST});
+      const [ REQUEST, SUCCESS, FAILURE ] = types;
+      next({ ...rest, type: REQUEST });
       return promise(httpClient)
         .then(response => next({
           ...rest,

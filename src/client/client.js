@@ -1,5 +1,5 @@
 import reduxible from '../universal/reduxible';
-import ReduxibleConfig from '../libs/ReduxibleConfig';
+import { ReduxibleConfig } from 'reduxible';
 import config from '../../config/index';
 
 const app = reduxible(new ReduxibleConfig({
