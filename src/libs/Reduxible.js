@@ -20,17 +20,24 @@ export default class Reduxible {
     const history = createMemoryHistory();
     const router = new ReduxibleRouter(this.routes, store, history);
     return (req, res) => {
+      if(!this.config.isUniversal()) {
+        return res.send(this._renderContainer('', store));
+      }
+
       router.route(req.originalUrl, (error, redirectLocation, component)=> {
         if (error) {
+          res.status(500);
           if (this.errorContainer) {
-            return res.status(500).end(this._renderContainer(this.errorContainer, store));
+            return res.send(this._renderContainer(this.errorContainer, store));
           }
-          return res.status(500).end(error);
-        } else if (redirectLocation) {
-          return res.redirect(redirectLocation.pathname);
-        } else {
-          return res.send(this._renderContainer(component, store));
+          return res.send(this._renderContainer(error, store));
         }
+
+        if (redirectLocation) {
+          return res.redirect(redirectLocation.pathname);
+        }
+
+        return res.send(this._renderContainer(component, store));
       });
     };
   }

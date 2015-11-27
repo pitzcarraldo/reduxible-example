@@ -18,6 +18,10 @@ export default class ReduxibleConfig {
     return this.development;
   }
 
+  isProduction() {
+    return !this.development;
+  }
+
   isUniversal() {
     return this.universal;
   }

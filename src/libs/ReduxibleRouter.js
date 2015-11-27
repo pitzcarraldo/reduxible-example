@@ -16,13 +16,17 @@ export default class ReduxibleRouter {
     match({routes: this.routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         return callback(error);
-      } else if (redirectLocation) {
-        return callback(null, redirectLocation);
-      } else if (renderProps) {
-        return callback(null, null, this._provide(<RoutingContext {...renderProps} />));
-      } else {
-        return callback();
       }
+
+      if (redirectLocation) {
+        return callback(null, redirectLocation);
+      }
+
+      if (renderProps) {
+        return callback(null, null, this._provide(<RoutingContext {...renderProps} />));
+      }
+
+      return callback();
     });
   }
 

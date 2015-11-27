@@ -25,13 +25,16 @@ export default class StoreFactory {
     } else {
       finalCreateStore = appliedMiddleware(createStore);
     }
+
     const reducer = combineReducers({...this.reducer, routing: routeReducer});
     const store = finalCreateStore(reducer, initialState);
+
     if (this.reload) {
       this.reload(this.isDevelopment, store, (reducer) => {
         return combineReducers({...reducer, routing: routeReducer});
       });
     }
+
     return store;
   }
 }
