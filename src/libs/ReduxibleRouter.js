@@ -12,24 +12,6 @@ export default class ReduxibleRouter {
     syncReduxAndRouter(this.history, this.store);
   }
 
-  createRouter() {
-    return <Router history={this.history} routes={this.routes}/>;
-  }
-
-  render() {
-    return this.getComponent(this.createRouter());
-  }
-
-  renderDevTools() {
-    const router = this.createRouter();
-    return this.getComponent(
-      <div>
-        {router}
-        <DevTools/>
-      </div>
-    );
-  }
-
   route(location, callback) {
     match({routes: this.routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
@@ -37,18 +19,39 @@ export default class ReduxibleRouter {
       } else if (redirectLocation) {
         return callback(null, redirectLocation);
       } else if (renderProps) {
-        return callback(null, null, this.getComponent(<RoutingContext {...renderProps} />));
+        return callback(null, null, this._provide(<RoutingContext {...renderProps} />));
       } else {
         return callback();
       }
     });
   }
 
-  getComponent(children) {
+  render() {
+    return this._provide(this._getRouter());
+  }
+
+  renderDevTools() {
+    return this._provide(this._getDevToolsRouter());
+  }
+
+  _provide(children) {
     return (
       <Provider store={this.store} key="provider">
         {children}
       </Provider>
     )
+  }
+
+  _getRouter() {
+    return <Router history={this.history} routes={this.routes}/>;
+  }
+
+  _getDevToolsRouter() {
+    return (
+      <div>
+        {this._getRouter()}
+        <DevTools/>
+      </div>
+    );
   }
 }
