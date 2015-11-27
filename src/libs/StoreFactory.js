@@ -9,7 +9,7 @@ export default class StoreFactory {
     this.useDevTools = options.config.useDevTools();
     this.middleware = options.middleware;
     this.reducer = options.reducer;
-    this.reducerPath = options.reducerPath;
+    this.reload = options.reload;
   }
 
   createStore(initialState = {}) {
@@ -25,16 +25,13 @@ export default class StoreFactory {
     } else {
       finalCreateStore = appliedMiddleware(createStore);
     }
-
     const reducer = combineReducers({...this.reducer, routing: routeReducer});
     const store = finalCreateStore(reducer, initialState);
-    if (this.isDevelopment && module.hot) {
-      module.hot.accept(this.reducerPath, () => {
-        console.log('hot');
-        store.replaceReducer(combineReducers({...this.reducer, routing: routeReducer}));
+    if (this.reload) {
+      this.reload(this.isDevelopment, store, (reducer) => {
+        return combineReducers({...reducer, routing: routeReducer});
       });
     }
-
     return store;
   }
 }

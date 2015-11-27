@@ -6,8 +6,4 @@ export default {
   auth,
   info,
   widgets
-};
-
-export function getPath() {
-  return __dirname;
 }

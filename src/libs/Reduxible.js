@@ -45,9 +45,11 @@ export default class Reduxible {
     const history = createBrowserHistory();
     const router = new ReduxibleRouter(this.routes, store, history);
     ReactDOM.render(router.render(), dest);
-    if(this.config.useDevTools()) {
+    if (this.config.useDevTools()) {
       window.React = React;
       ReactDOM.render(router.renderDevTools(), dest);
     }
   }
+
+  replaceReducer
 }

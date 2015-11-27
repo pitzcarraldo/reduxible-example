@@ -18,7 +18,7 @@ const server = new Express();
 
 server.use(compression());
 server.use(serveFavicon(path.join(__dirname, '..', '..', 'static', 'favicon.ico')));
-if(config.development) {
+if (config.development) {
   devServer(server);
 } else {
   server.use(serveStatic(path.join(__dirname, '..', '..', 'static')));
