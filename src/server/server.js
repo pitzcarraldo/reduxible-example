@@ -1,5 +1,5 @@
 import 'source-map-support/register';
-import './logger';
+import logger from './logger';
 import Express from 'express';
 import serveFavicon from 'serve-favicon';
 import serveStatic from 'serve-static';
