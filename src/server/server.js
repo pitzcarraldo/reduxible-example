@@ -1,12 +1,14 @@
+import 'source-map-support/register';
+import './logger';
 import Express from 'express';
 import serveFavicon from 'serve-favicon';
 import serveStatic from 'serve-static';
 import compression from 'compression';
 import path from 'path';
 import { ReduxibleConfig } from 'reduxible';
-import config from '../../config/index';
+import config from '../config/index';
 import reduxible from '../universal/reduxible';
-import devServer from '../../webpack/devServer';
+import devServer from './devServer';
 
 const app = reduxible(new ReduxibleConfig({
   server: true,

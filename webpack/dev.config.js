@@ -22,6 +22,10 @@ module.exports = {
         query: babelConfig
       },
       {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+      {
         test: /\.(png|jpg|gif|jpeg)$/,
         loader: 'url-loader?limit=8192'
       },
