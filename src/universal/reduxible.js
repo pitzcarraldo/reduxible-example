@@ -5,16 +5,16 @@ import routes from './routes';
 import middleware from './middleware/index';
 import reducer from './reducer/index';
 
-const reload = (isDevelopment, store, combineReducers) => {
-  if (isDevelopment && module.hot) {
-    module.hot.accept('./reducer/index', () => {
-      const reducer = combineReducers(require('./reducer/index'));
-      store.replaceReducer(reducer);
-    });
-  }
-};
-
 export default function reduxible(config) {
+  const reloader = (store, combineReducers) => {
+    if (config.isDevelopment() && module.hot) {
+      module.hot.accept('./reducer/index', () => {
+        const reducer = combineReducers(require('./reducer/index'));
+        store.replaceReducer(reducer);
+      });
+    }
+  };
+
   return new Reduxible({
     config,
     container: Html,
@@ -22,6 +22,6 @@ export default function reduxible(config) {
     routes,
     middleware,
     reducer,
-    reload
+    reloader
   });
 }
