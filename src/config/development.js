@@ -4,10 +4,10 @@ export default {
   "devTools": true,
   "client": {
     "host": "localhost",
-    "port": 3000
+    "port": 8080
   },
   "server": {
     "host": "localhost",
-    "port": 8080
+    "port": 3000
   }
 }
