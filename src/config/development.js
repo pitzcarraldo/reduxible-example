@@ -3,9 +3,11 @@ export default {
   "universal": true,
   "devTools": true,
   "client": {
-
+    "host": "localhost",
+    "port": 3000
   },
   "server": {
+    "host": "localhost",
     "port": 8080
   }
 }

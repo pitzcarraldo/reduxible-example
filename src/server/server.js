@@ -8,7 +8,6 @@ import path from 'path';
 import { ReduxibleConfig } from 'reduxible';
 import config from '../config/index';
 import reduxible from '../universal/reduxible';
-import devServer from './devServer';
 
 const app = reduxible(new ReduxibleConfig({
   server: true,
@@ -16,15 +15,12 @@ const app = reduxible(new ReduxibleConfig({
   universal: config.universal,
   devTools: config.devTools
 }));
+
 const server = new Express();
 
 server.use(compression());
 server.use(serveFavicon(path.join(__dirname, '..', '..', 'static', 'favicon.ico')));
-if (config.development) {
-  devServer(server);
-} else {
-  server.use(serveStatic(path.join(__dirname, '..', '..', 'static')));
-}
+server.use(serveStatic(path.join(__dirname, '..', '..', 'static')));
 server.use(app.server());
 
 var listener = server.listen(config.server.port, function () {
