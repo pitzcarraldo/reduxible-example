@@ -11,7 +11,6 @@ export default class Html extends Component {
   render() {
     const { component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
-
     return (
       <html lang="en-us">
         <head>

@@ -8,9 +8,9 @@ import Footer from '../../components/Footer';
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <Header />
+      <div id="layout">
         <Nav />
+        <Header />
         {this.props.children}
         <Footer />
       </div>
