@@ -7,7 +7,7 @@ import reducer from './reducer/index';
 
 export default function reduxible(config) {
   const reloader = (store, combineReducers) => {
-    if (config.isDevelopment() && module.hot) {
+    if (module.hot) {
       module.hot.accept('./reducer/index', () => {
         const reducer = combineReducers(require('./reducer/index'));
         store.replaceReducer(reducer);
@@ -22,6 +22,7 @@ export default function reduxible(config) {
     routes,
     middleware,
     reducer,
-    reloader
+    reloader,
+    extras: config.extras
   });
 }

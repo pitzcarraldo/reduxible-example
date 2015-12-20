@@ -1,6 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 var babelConfig = require('./babel.config');
+var isomorphic = require('./isomorphic').plugin;
+var querify = function (loader, query) {
+  return loader + '?' + JSON.stringify(query);
+};
+
 module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
@@ -10,28 +15,65 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '..', 'static', 'dist'),
-    filename: 'app.js',
+    filename: '[name]-[hash].js',
+    chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
         exclude: /node_modules/,
-        query: babelConfig
+        loaders: [
+          querify('babel', babelConfig),
+          'eslint-loader'
+        ]
       },
       {
         test: /\.json$/,
         loader: 'json-loader'
       },
       {
-        test: /\.(png|jpg|gif|jpeg)$/,
-        loader: 'url-loader?limit=8192'
+        test: /\.(css|scss)/,
+        exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        loaders: [
+          'style',
+          querify('css', {
+            modules: false,
+            sourceMap: true
+          }),
+          querify('sass', {
+            sourceMap: true,
+            outputStyle: 'expanded'
+          })
+        ]
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        test: /\.scss$/,
+        include: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        loaders: [
+          'style',
+          querify('css', {
+            modules: true,
+            sourceMap: true,
+            importLoaders: 2,
+            localIdentName: '[local]___[hash:base64:5]'
+          }),
+          querify('sass', {
+            sourceMap: true,
+            outputStyle: 'expanded'
+          }),
+          querify('autoprefixer', {
+            browsers: 'last 4 version'
+          })
+        ]
+      },
+      {
+        test: isomorphic.regular_expression('images'),
+        loader: 'url-loader',
+        query: {
+          limit: 10240
+        }
       }
     ]
   },
@@ -43,6 +85,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
-    })
+    }),
+    isomorphic.development()
   ]
 };

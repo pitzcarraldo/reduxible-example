@@ -5,13 +5,14 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './dev.config';
-import config from '../src/config/index';
+import config from '../config/index';
 
 const compiler = webpack(webpackConfig);
 const server = new Express();
 
 server.use(webpackDevMiddleware(compiler, {
   noInfo: true,
+  quiet: true,
   publicPath: webpackConfig.output.publicPath
 }));
 server.use(webpackHotMiddleware(compiler));

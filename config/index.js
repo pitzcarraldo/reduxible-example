@@ -4,5 +4,5 @@ const configs = {
   development,
   production
 };
-const env = process.NODE_ENV || 'development';
-export default Object.assign({env}, configs[env]);
+const env = process.env.NODE_ENV || 'development';
+export default Object.assign({ env }, configs[env]);

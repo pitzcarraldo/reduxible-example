@@ -77,3 +77,7 @@ crashlytics-build.properties
 
 # Created by .ignore support plugin (hsz.mobi)
 dist
+
+# webpack-isomorphic-tools
+webpack-stats.json
+webpack-assets.json
