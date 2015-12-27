@@ -4,9 +4,7 @@ var babelConfig = require('./babel.config');
 var strip = require('strip-loader');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var isomorphic = require('./isomorphic').plugin;
-var querify = function (loader, query) {
-  return loader + '?' + JSON.stringify(query);
-};
+var querify = require('./querify');
 
 module.exports = {
   devtool: 'source-map',
@@ -27,7 +25,7 @@ module.exports = {
         exclude: /node_modules/,
         loaders: [
           strip.loader('debug'),
-          querify('babel', babelConfig)
+          querify({'babel': babelConfig})
         ]
       },
       {
@@ -38,36 +36,38 @@ module.exports = {
         test: /\.(css|scss)/,
         exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
         loader: ExtractTextPlugin.extract(
-          'style', [
-            querify('css', {
+          'style',
+          querify({
+            'css': {
               sourceMap: true
-            }),
-            querify('sass', {
+            },
+            'sass': {
               sourceMap: true,
               outputStyle: 'expanded'
-            })
-          ].join('!'))
+            }
+          })
+        )
       },
       {
         test: /\.(css|scss)/,
         include: path.join(__dirname, '..', 'src', 'universal', 'views'),
         loader: ExtractTextPlugin.extract(
           'style',
-          [
-            querify('css', {
+          querify({
+            'css': {
               modules: true,
               importLoaders: 2,
               sourceMap: true
-            }),
-            querify('sass', {
+            },
+            'sass': {
               outputStyle: 'expanded',
-              'sourceMap': true,
+              sourceMap: true,
               sourceMapContents: true
-            }),
-            querify('autoprefixer', {
+            },
+            'autoprefixer': {
               browsers: 'last 4 version'
-            })
-          ].join('!')
+            }
+          })
         )
       },
       {

@@ -4,9 +4,6 @@
   "description": "Example of The Universal Web Application based on Reduxible.",
   "scripts": {
     "clean": "rimraf dist static/dist",
-    "start": "pm2 start app.json",
-    "logrotate": "pm2 install pm2-logrotate && pm2 set pm2-logrotate:max_size 1G && pm2 set pm2-logrotate:retain 14",
-    "stop": "pm2 stop all",
     "lint": "eslint src test",
     "test": "mocha --compilers js:babel/register --recursive",
     "check": "npm run lint && npm run test",
@@ -35,7 +32,6 @@
     "json-loader": "^0.5.4",
     "log4js": "^0.6.29",
     "measured": "^1.0.2",
-    "pm2": "^0.15.10",
     "purecss": "^0.6.0",
     "query-string": "^3.0.0",
     "react": "^0.14.3",

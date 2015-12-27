@@ -2,9 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var babelConfig = require('./babel.config');
 var isomorphic = require('./isomorphic').plugin;
-var querify = function (loader, query) {
-  return loader + '?' + JSON.stringify(query);
-};
+var querify = require('./querify');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -25,7 +23,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [
-          querify('babel', babelConfig),
+          querify({'babel': babelConfig}),
           'eslint-loader'
         ]
       },
@@ -36,37 +34,37 @@ module.exports = {
       {
         test: /\.(css|scss)/,
         exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
-        loaders: [
-          'style',
-          querify('css', {
+        loader: querify({
+          'style': {},
+          'css': {
             modules: false,
             sourceMap: true
-          }),
-          querify('sass', {
+          },
+          'sass': {
             sourceMap: true,
             outputStyle: 'expanded'
-          })
-        ]
+          }
+        })
       },
       {
         test: /\.scss$/,
         include: path.join(__dirname, '..', 'src', 'universal', 'views'),
-        loaders: [
-          'style',
-          querify('css', {
+        loader: querify({
+          'style': '',
+          'css': {
             modules: true,
             sourceMap: true,
             importLoaders: 2,
             localIdentName: '[local]___[hash:base64:5]'
-          }),
-          querify('sass', {
+          },
+          'sass': {
             sourceMap: true,
             outputStyle: 'expanded'
-          }),
-          querify('autoprefixer', {
+          },
+          'autoprefixer': {
             browsers: 'last 4 version'
-          })
-        ]
+          }
+        })
       },
       {
         test: isomorphic.regular_expression('images'),
