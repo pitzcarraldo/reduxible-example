@@ -27,7 +27,6 @@ export default class App extends Component {
   }
 
   render() {
-    require('../../../../styles/global.scss');
     const { menuOpen } = this.props;
     const active = menuOpen ? 'active' : '';
     return (

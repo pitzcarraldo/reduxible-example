@@ -1,11 +1,12 @@
-import reduxible from '../universal/reduxible';
+import ReloadableReduxible from '../universal/ReloadableReduxible';
 import config from '../../config/index';
+import './pure.scss';
 
-const app = reduxible({
+const reduxible = new ReloadableReduxible({
   server: false,
   development: config.development,
   universal: config.universal,
   devTools: config.devTools
 });
 
-app.client(window.__state, document.getElementById('content'));
+reduxible.client(window.__state, document.getElementById('content'));

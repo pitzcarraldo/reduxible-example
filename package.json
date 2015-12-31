@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rimraf dist static/dist",
     "lint": "eslint src test",
-    "test": "mocha --compilers js:babel/register --recursive",
+    "test": "mocha",
     "check": "npm run lint && npm run test",
     "build": "rimraf static/dist && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "prod": "npm run build && NODE_ENV=production node bin/start",
@@ -46,7 +46,6 @@
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.0",
-    "source-map-support": "^0.3.3",
     "webpack-isomorphic-tools": "^2.2.21"
   },
   "devDependencies": {

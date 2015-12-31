@@ -1,14 +1,17 @@
 import { createReducer, createAction } from 'reduxible';
 const actions = {
   TOGGLE_MENU: {
-    creator: (payload) => {
+    creator: (menuOpen) => {
       return {
-        payload
+        payload: {
+          menuOpen
+        }
       };
     },
     reducer: (payload) => {
+      const { menuOpen } = payload;
       return {
-        menuOpen: payload
+        menuOpen
       };
     }
   }
