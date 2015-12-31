@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../../components/Header';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
-import { actions } from '../../../reducer/menu';
+import { action } from '../../../reducer/menu';
 
 @connect(
   state =>
@@ -12,7 +12,7 @@ import { actions } from '../../../reducer/menu';
       menuOpen: state.menu.menuOpen
     }),
   {
-    toggleMenu: actions.TOGGLE_MENU.action
+    toggleMenu: action('TOGGLE_MENU')
   }
 )
 export default class App extends Component {

@@ -1,6 +1,6 @@
 {
   "name": "reduxible-example",
-  "version": "0.0.2-alpha.2",
+  "version": "0.0.2-alpha.4",
   "description": "Example of The Universal Web Application based on Reduxible.",
   "scripts": {
     "clean": "rimraf dist static/dist",
@@ -28,20 +28,20 @@
     "express": "^4.13.3",
     "gc-stats": "^1.0.0",
     "graphite": "0.0.6",
-    "history": "1.13.x",
+    "history": "^1.17.x",
     "json-loader": "^0.5.4",
     "log4js": "^0.6.29",
     "measured": "^1.0.2",
     "purecss": "^0.6.0",
     "query-string": "^3.0.0",
-    "react": "^0.14.3",
-    "react-addons-css-transition-group": "^0.14.3",
-    "react-dom": "^0.14.3",
+    "react": "^0.14.5",
+    "react-addons-css-transition-group": "^0.14.5",
+    "react-dom": "^0.14.5",
     "react-redux": "^4.0.0",
-    "react-router": "^1.0.0",
+    "react-router": "^1.0.3",
     "redux": "^3.0.4",
-    "redux-simple-router": "0.0.8",
-    "reduxible": "0.0.2-alpha.2",
+    "redux-simple-router": "^1.0.2",
+    "reduxible": "0.0.2-alpha.4",
     "rolex": "0.0.1",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
@@ -82,7 +82,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.6",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.5.0"
+    "webpack-hot-middleware": "^2.5.0",
+    "webpack-querify": "^0.0.1"
   },
   "engines": {
     "node": "^4.2.2"

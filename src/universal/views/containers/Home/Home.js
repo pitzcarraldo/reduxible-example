@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export default class Home extends Component {
   render() {
+    const lake = require('./imgs/lake.jpg');
+    const mountain = require('./imgs/mountain.jpg');
+    const tshirts = require('./imgs/t-shirt.jpg');
+    const train = require('./imgs/train.jpg');
     return (
       <div className="content">
         <h2 className="content-subhead">How to Reduxible</h2>
@@ -16,16 +20,16 @@ export default class Home extends Component {
 
           <div className="pure-g">
             <div className="pure-u-1-4">
-              <img className="pure-img-responsive" src="http://farm3.staticflickr.com/2875/9069037713_1752f5daeb.jpg" alt="Peyto Lake" />
+              <img className="pure-img-responsive" src={lake} alt="Peyto Lake" />
             </div>
             <div className="pure-u-1-4">
-              <img className="pure-img-responsive" src="http://farm3.staticflickr.com/2813/9069585985_80da8db54f.jpg" alt="Train"/>
+              <img className="pure-img-responsive" src={train} alt="Train"/>
             </div>
             <div className="pure-u-1-4">
-              <img className="pure-img-responsive" src="http://farm6.staticflickr.com/5456/9121446012_c1640e42d0.jpg" alt="T-Shirt Store"/>
+              <img className="pure-img-responsive" src={tshirts} alt="T-Shirt Store"/>
             </div>
             <div className="pure-u-1-4">
-              <img className="pure-img-responsive" src="http://farm8.staticflickr.com/7357/9086701425_fda3024927.jpg" alt="Mountain"/>
+              <img className="pure-img-responsive" src={mountain} alt="Mountain"/>
             </div>
           </div>
           <h2 className="content-subhead">Redux?</h2>

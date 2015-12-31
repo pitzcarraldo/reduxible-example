@@ -4,7 +4,7 @@ var babelConfig = require('./babel.config');
 var strip = require('strip-loader');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var isomorphic = require('./isomorphic').plugin;
-var querify = require('./querify');
+var $q = require('webpack-querify');
 
 module.exports = {
   devtool: 'source-map',
@@ -25,7 +25,7 @@ module.exports = {
         exclude: /node_modules/,
         loaders: [
           strip.loader('debug'),
-          querify({'babel': babelConfig})
+          $q({'babel': babelConfig})
         ]
       },
       {
@@ -37,7 +37,7 @@ module.exports = {
         exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
         loader: ExtractTextPlugin.extract(
           'style',
-          querify({
+          $q({
             'css': {
               sourceMap: true
             },
@@ -53,7 +53,7 @@ module.exports = {
         include: path.join(__dirname, '..', 'src', 'universal', 'views'),
         loader: ExtractTextPlugin.extract(
           'style',
-          querify({
+          $q({
             'css': {
               modules: true,
               importLoaders: 2,

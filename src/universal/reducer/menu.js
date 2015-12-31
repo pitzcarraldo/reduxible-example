@@ -1,20 +1,17 @@
-import reducer from './reducer';
-export default reducer(
-  {
-    menuOpen: false
-  },
-  {
-    TOGGLE_MENU: {
-      action: (value) => {
-        return {
-          type: 'TOGGLE_MENU',
-          value: value
-        };
-      },
-      reduce: (value) => {
-        return {
-          menuOpen: value
-        };
-      }
+import { createReducer, createAction } from 'reduxible';
+const actions = {
+  TOGGLE_MENU: {
+    creator: (payload) => {
+      return {
+        payload
+      };
+    },
+    reducer: (payload) => {
+      return {
+        menuOpen: payload
+      };
     }
-  });
+  }
+};
+export default createReducer({ menuOpen: false }, actions);
+export const action = createAction(actions);

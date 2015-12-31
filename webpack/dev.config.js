@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var babelConfig = require('./babel.config');
 var isomorphic = require('./isomorphic').plugin;
-var querify = require('./querify');
+var $q = require('webpack-querify');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -23,8 +23,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [
-          querify({'babel': babelConfig}),
-          'eslint-loader'
+          $q({'babel': babelConfig})
         ]
       },
       {
@@ -34,7 +33,7 @@ module.exports = {
       {
         test: /\.(css|scss)/,
         exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
-        loader: querify({
+        loader: $q({
           'style': {},
           'css': {
             modules: false,
@@ -49,8 +48,8 @@ module.exports = {
       {
         test: /\.scss$/,
         include: path.join(__dirname, '..', 'src', 'universal', 'views'),
-        loader: querify({
-          'style': '',
+        loader: $q({
+          'style': {},
           'css': {
             modules: true,
             sourceMap: true,
