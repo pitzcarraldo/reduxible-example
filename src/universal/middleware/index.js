@@ -1,6 +1,5 @@
-import cookieMiddleware from './cookieMiddleware';
-import httpClientMiddleware from './httpClientMiddleware';
+//import cookieMiddleware from './cookieMiddleware';
+//import httpClientMiddleware from './httpClientMiddleware';
 
 export default [
-  cookieMiddleware, httpClientMiddleware
 ];

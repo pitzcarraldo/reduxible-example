@@ -1,6 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
 var babelConfig = require('./babel.config');
+var isomorphic = require('./isomorphic').plugin;
+var $q = require('webpack-querify');
+
 module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
@@ -10,24 +13,64 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '..', 'static', 'dist'),
-    filename: 'app.js',
+    filename: '[name]-[hash].js',
+    chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
         exclude: /node_modules/,
-        query: babelConfig
+        loaders: [
+          $q({'babel': babelConfig})
+        ]
       },
       {
-        test: /\.(png|jpg|gif|jpeg)$/,
-        loader: 'url-loader?limit=8192'
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        test: /\.(css|scss)/,
+        exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        loader: $q({
+          'style': {},
+          'css': {
+            modules: false,
+            sourceMap: true
+          },
+          'sass': {
+            sourceMap: true,
+            outputStyle: 'expanded'
+          }
+        })
+      },
+      {
+        test: /\.scss$/,
+        include: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        loader: $q({
+          'style': {},
+          'css': {
+            modules: true,
+            sourceMap: true,
+            importLoaders: 2,
+            localIdentName: '[local]___[hash:base64:5]'
+          },
+          'sass': {
+            sourceMap: true,
+            outputStyle: 'expanded'
+          },
+          'autoprefixer': {
+            browsers: 'last 4 version'
+          }
+        })
+      },
+      {
+        test: isomorphic.regular_expression('images'),
+        loader: 'url-loader',
+        query: {
+          limit: 10240
+        }
       }
     ]
   },
@@ -39,6 +82,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
-    })
+    }),
+    isomorphic.development()
   ]
 };

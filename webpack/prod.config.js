@@ -1,7 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
 var babelConfig = require('./babel.config');
+var strip = require('strip-loader');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var isomorphic = require('./isomorphic').plugin;
+var $q = require('webpack-querify');
 
 module.exports = {
   devtool: 'source-map',
@@ -11,28 +14,73 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '..', 'static', 'dist'),
-    filename: 'app.js',
+    filename: '[name]-[chunkhash].js',
+    chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
         exclude: /node_modules/,
-        query: babelConfig
+        loaders: [
+          strip.loader('debug'),
+          $q({'babel': babelConfig})
+        ]
       },
       {
-        test: /\.(png|jpg|gif|jpeg)$/,
-        loader: 'url-loader?limit=8192'
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap')
+        test: /\.(css|scss)/,
+        exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        loader: ExtractTextPlugin.extract(
+          'style',
+          $q({
+            'css': {
+              sourceMap: true
+            },
+            'sass': {
+              sourceMap: true,
+              outputStyle: 'expanded'
+            }
+          })
+        )
+      },
+      {
+        test: /\.(css|scss)/,
+        include: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        loader: ExtractTextPlugin.extract(
+          'style',
+          $q({
+            'css': {
+              modules: true,
+              importLoaders: 2,
+              sourceMap: true
+            },
+            'sass': {
+              outputStyle: 'expanded',
+              sourceMap: true,
+              sourceMapContents: true
+            },
+            'autoprefixer': {
+              browsers: 'last 4 version'
+            }
+          })
+        )
+      },
+      {
+        test: isomorphic.regular_expression('images'),
+        loader: 'url-loader',
+        query: {
+          limit: 10240
+        }
       }
     ]
   },
   plugins: [
+    new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -41,6 +89,6 @@ module.exports = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
-    new ExtractTextPlugin('app.css')
+    isomorphic
   ]
 };

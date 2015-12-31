@@ -1,11 +1,11 @@
 export default {
-  "development": false,
-  "universal": true,
-  "devTools": false,
-  "client": {
-
+  'development': false,
+  'universal': true,
+  'devTools': false,
+  'client': {
   },
-  "server": {
-    "port": 8080
+  'server': {
+    'port': 8080
   }
-}
+};
+

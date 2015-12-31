@@ -1,9 +1,6 @@
-import auth from './auth';
-import info from './info';
-import widgets from './widgets';
+import { combineRouteReducers }  from 'reduxible';
+import menu from './menu';
 
-export default {
-  auth,
-  info,
-  widgets
-};
+export default combineRouteReducers({
+  menu
+});
