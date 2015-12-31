@@ -19,11 +19,10 @@ export default class ReloadableReduxible extends Reduxible {
     })
   }
 
-  static reloader(store, combineReducers) {
+  static reloader(store) {
     if (module.hot) {
       module.hot.accept('./reducer/index', () => {
-        const reducer = combineReducers(require('./reducer/index'));
-        store.replaceReducer(reducer);
+        store.replaceReducer(require('./reducer/index'));
       });
     }
   };

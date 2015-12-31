@@ -1,4 +1,6 @@
+import { combineRouteReducers }  from 'reduxible';
 import menu from './menu';
-export default {
+
+export default combineRouteReducers({
   menu
-};
+});

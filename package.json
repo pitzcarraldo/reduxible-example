@@ -1,6 +1,6 @@
 {
   "name": "reduxible-example",
-  "version": "0.0.2-alpha.4",
+  "version": "0.0.2-alpha.5",
   "description": "Example of The Universal Web Application based on Reduxible.",
   "scripts": {
     "clean": "rimraf dist static/dist",
@@ -41,7 +41,7 @@
     "react-router": "^1.0.3",
     "redux": "^3.0.4",
     "redux-simple-router": "^1.0.2",
-    "reduxible": "0.0.2-alpha.4",
+    "reduxible": "0.0.2-alpha.5",
     "rolex": "0.0.1",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
