@@ -6,6 +6,7 @@ import path from 'path';
 import { ReduxibleConfig } from 'reduxible';
 import config from '../../config/index';
 import ReloadableReduxible from '../universal/ReloadableReduxible';
+import api from './api/index';
 
 export default function (isomorphic) {
   const reduxible = new ReloadableReduxible({
@@ -13,7 +14,7 @@ export default function (isomorphic) {
     development: config.development,
     universal: config.universal,
     devTools: config.devTools,
-    extras: {isomorphic}
+    extras: { isomorphic }
   });
 
   const app = new Express();

@@ -6,6 +6,10 @@ export default {
   },
   'server': {
     'port': 8080
+  },
+  api: {
+    host: 'localhost',
+    port: 8000
   }
 };
 

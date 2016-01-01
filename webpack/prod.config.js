@@ -23,10 +23,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [
-          strip.loader('debug'),
-          $q({'babel': babelConfig})
-        ]
+        loaders: [ strip.loader('debug'), 'babel' ]
       },
       {
         test: /\.json$/,

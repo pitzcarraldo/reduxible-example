@@ -19,18 +19,23 @@ export default class Nav extends Component {
             <IndexLink className="pure-menu-heading" to="/">Reduxible</IndexLink>
             <ul className="pure-menu-list">
               <li>
-                <IndexLink className="pure-menu-item pure-menu-link" activeClassName="pure-menu-selected" to="/">
+                <IndexLink className="pure-menu-item pure-menu-link" to="/">
                   Home
                 </IndexLink>
               </li>
               <li>
-                <Link className="pure-menu-item pure-menu-link" activeClassName="pure-menu-selected" to="counter">
+                <Link className="pure-menu-item pure-menu-link" to="counter">
                   Counter
                 </Link>
               </li>
               <li>
-                <Link className="pure-menu-item pure-menu-link" activeClassName="pure-menu-selected" to="about">
-                  About
+                <Link className="pure-menu-item pure-menu-link" to="todo">
+                  Todo
+                </Link>
+              </li>
+              <li>
+                <Link className="pure-menu-item pure-menu-link" to="about">
+                  About Me
                 </Link>
               </li>
             </ul>

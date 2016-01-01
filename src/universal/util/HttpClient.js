@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 export default class HttpClient {
-  constructor(host, req, isServer) {
-    [ 'get', 'post', 'put', 'patch', 'delete' ].forEach(
+  constructor(host, req) {
+    ['get', 'post', 'put', 'patch', 'delete'].forEach(
       (method) => {
         this[method] = (path, options) => {
           const request = {};
@@ -19,10 +19,10 @@ export default class HttpClient {
           }
 
           if (options && options.headers) {
-            request.headers = Object.assign({}, options.headers);
+            request.headers = { ...options.headers };
           }
 
-          if (isServer && req.get('cookie')) {
+          if (req && req.get('cookie')) {
             request.headers = request.headers || {};
             request.headers.cookie = req.get('cookie');
           }

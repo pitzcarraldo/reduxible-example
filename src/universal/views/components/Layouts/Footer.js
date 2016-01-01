@@ -18,7 +18,7 @@ export default class Footer extends Component {
           <div className="pure-u-1 u-sm-1-2">
             <a href="https://github.com/Pitzcarraldo/reduxible-example">GitHub Project</a>
             <p className="legal-copyright">
-              © 2015 Minkyu Cho. All rights reserved.
+              © 2016 Minkyu Cho. All rights reserved.
             </p>
           </div>
         </div>
