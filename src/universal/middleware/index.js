@@ -1,7 +1,7 @@
-//import cookieMiddleware from './cookieMiddleware';
-//import httpClientMiddleware from './httpClientMiddleware';
 import thunk from 'redux-thunk';
+import helperMiddleware from './helperMiddleware';
 
 export default [
-  thunk
+  thunk,
+  helperMiddleware()
 ];

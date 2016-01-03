@@ -4,8 +4,6 @@ import Error from './views/containers/Error/Error';
 import routes from './routes';
 import middleware from './middleware/index';
 import reducer from './actions/reducer';
-import HttpClient from './util/HttpClient';
-import CookieManager from './util/CookieManager';
 
 export default class ReloadableReduxible extends Reduxible {
   constructor(config) {
@@ -28,14 +26,4 @@ export default class ReloadableReduxible extends Reduxible {
       });
     }
   };
-
-  getHttpClient() {
-    if(!this.httpClient) {
-      this.httpClient = new HttpClient()
-    }
-  }
-
-  getCookieManager() {
-
-  }
 }

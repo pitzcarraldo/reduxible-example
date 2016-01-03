@@ -1,13 +1,13 @@
 const axios = require('axios');
 
 export default class HttpClient {
-  constructor(host, req) {
+  constructor(req) {
     ['get', 'post', 'put', 'patch', 'delete'].forEach(
       (method) => {
-        this[method] = (path, options) => {
+        this[method] = (url, options) => {
           const request = {};
 
-          request.url = host + HttpClient.formatUrl(path);
+          request.url = url;
           request.method = method;
 
           if (options && options.data) {
@@ -30,9 +30,5 @@ export default class HttpClient {
           return axios(request);
         };
       });
-  }
-
-  static formatUrl(path) {
-    return path[0] !== '/' ? '/' + path : path;
   }
 }
