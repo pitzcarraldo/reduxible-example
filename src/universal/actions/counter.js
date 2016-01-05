@@ -1,10 +1,10 @@
 import { createReducer, createAction } from 'reduxible';
 
-const actions = {
+export const action = createAction({
   INCREMENT: {}
-};
+});
 
-const reducers = [
+export default createReducer({count: 0}, [
   {
     types: ['INCREMENT'],
     reduce: (payload, state) => {
@@ -14,7 +14,4 @@ const reducers = [
       };
     }
   }
-];
-
-export default createReducer({count: 0}, reducers);
-export const action = createAction(actions);
+]);

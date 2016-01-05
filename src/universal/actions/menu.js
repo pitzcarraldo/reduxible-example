@@ -1,6 +1,6 @@
 import { createReducer, createAction } from 'reduxible';
 
-const actions = {
+export const action = createAction({
   TOGGLE_MENU: (menuOpen) => {
     return {
       payload: {
@@ -8,9 +8,9 @@ const actions = {
       }
     }
   }
-};
+});
 
-const reducers = [
+export default createReducer({menuOpen: false}, [
   {
     types: ['TOGGLE_MENU'],
     reduce: (payload) => {
@@ -20,7 +20,4 @@ const reducers = [
       };
     }
   }
-];
-
-export default createReducer({menuOpen: false}, reducers);
-export const action = createAction(actions);
+]);

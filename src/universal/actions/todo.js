@@ -1,6 +1,6 @@
 import { createReducer, createAction } from 'reduxible';
 
-const actions = {
+export const action = createAction({
   ADD_TODO: (todo) => {
     return {
       payload: {
@@ -17,15 +17,16 @@ const actions = {
       helper: true
     };
   }
-};
+});
 
-const reducers = [
+export default createReducer({todos: []}, [
   {
     types: ['ADD_TODO'],
     reduce: (payload, state) => {
       const { todo } = payload;
       const todos = [...state.todos, todo];
       return {
+        ...state,
         todos
       };
     }
@@ -39,11 +40,9 @@ const reducers = [
         todos.splice(index, 1);
       }
       return {
+        ...state,
         todos
       };
     }
   }
-];
-
-export default createReducer({todos: []}, reducers);
-export const action = createAction(actions);
+]);
