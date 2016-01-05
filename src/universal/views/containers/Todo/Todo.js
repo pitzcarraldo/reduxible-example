@@ -28,6 +28,11 @@ export default class Todo extends Component {
     this.setState({todo: ''});
   };
 
+  removeTodo(e) {
+    const { removeTodo }= this.props;
+    removeTodo(e.target.dataset['index']);
+  };
+
   handleChange(e) {
     this.setState({todo: e.target.value});
   };
@@ -40,7 +45,7 @@ export default class Todo extends Component {
         <input type="text" className="pure-input-rounded" placeholder="Add Todo Here" value={todo} onChange={::this.handleChange} />
         <button className="pure-button-primary" onClick={::this.addTodo}>Add Todo</button>
         <ul>
-          {todos.map((each, key) => { return <li key={key}>{each}</li> })}
+          {todos.map((each, key) => { return <li key={key} data-index={key} onClick={::this.removeTodo}>{each}</li> })}
         </ul>
       </div>);
   }
