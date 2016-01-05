@@ -20,4 +20,13 @@ export default class CookieManager {
   set(name, value, option) {
     return this.cookie(name, value, option);
   }
+
+  static INSTANCE;
+
+  static getInstance(req){
+    if(!CookieManager.INSTANCE) {
+      CookieManager.INSTANCE = new CookieManager(req);
+    }
+    return CookieManager.INSTANCE;
+  }
 }

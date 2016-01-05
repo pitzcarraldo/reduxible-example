@@ -2,9 +2,25 @@ import { createReducer, createAction } from 'reduxible';
 
 export const action = createAction({
   ADD_TODO: (todo) => {
+    return (dispatch, getState, helper) => {
+      const { http } = helper;
+      http.post('http://localhost:8000/todos', {
+        data: { todo }
+      })
+        .then((res)=> {
+          const todos = res.data;
+          return dispatch(action('UPDATE_TODOS')(todos));
+        })
+        .catch((res)=> {
+          console.log(res);
+          return;
+        });
+    }
+  },
+  UPDATE_TODOS: (todos) => {
     return {
       payload: {
-        todo
+        todos
       },
       helper: true
     };
@@ -21,10 +37,9 @@ export const action = createAction({
 
 export default createReducer({todos: []}, [
   {
-    types: ['ADD_TODO'],
+    types: ['UPDATE_TODOS'],
     reduce: (payload, state) => {
-      const { todo } = payload;
-      const todos = [...state.todos, todo];
+      const { todos } = payload;
       return {
         ...state,
         todos

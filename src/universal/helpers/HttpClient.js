@@ -19,7 +19,7 @@ export default class HttpClient {
           }
 
           if (options && options.headers) {
-            request.headers = { ...options.headers };
+            request.headers = {...options.headers};
           }
 
           if (req && req.get('cookie')) {
@@ -31,4 +31,14 @@ export default class HttpClient {
         };
       });
   }
+
+  static INSTANCE;
+
+  static getInstance(req){
+    if(!HttpClient.INSTANCE) {
+      HttpClient.INSTANCE = new HttpClient(req);
+    }
+    return HttpClient.INSTANCE;
+  }
+
 }

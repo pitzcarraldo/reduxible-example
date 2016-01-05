@@ -40,7 +40,7 @@ export default class Todo extends Component {
         <input type="text" className="pure-input-rounded" placeholder="Add Todo Here" value={todo} onChange={::this.handleChange} />
         <button className="pure-button-primary" onClick={::this.addTodo}>Add Todo</button>
         <ul>
-          {todos.map((each) => { return <li>{each}</li> })}
+          {todos.map((each, key) => { return <li key={key}>{each}</li> })}
         </ul>
       </div>);
   }
