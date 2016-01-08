@@ -22,23 +22,13 @@ export default class HttpClient {
             request.headers = {...options.headers};
           }
 
-          if (req && req.get('cookie')) {
+          if (req && req.cookies) {
             request.headers = request.headers || {};
-            request.headers.cookie = req.get('cookie');
+            request.headers.cookie = req.cookies;
           }
 
           return axios(request);
         };
       });
   }
-
-  static INSTANCE;
-
-  static getInstance(req){
-    if(!HttpClient.INSTANCE) {
-      HttpClient.INSTANCE = new HttpClient(req);
-    }
-    return HttpClient.INSTANCE;
-  }
-
 }

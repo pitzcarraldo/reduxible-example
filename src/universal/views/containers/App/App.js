@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Header, Footer, Nav } from '../../components/index';
-import { action } from '../../../actions/menu';
+import { action } from '../../../services/menu';
 
 @connect(
   state =>

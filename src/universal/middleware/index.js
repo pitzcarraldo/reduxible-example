@@ -1,5 +1,5 @@
-import helperMiddleware from './helperMiddleware';
+import helpersMiddleware from './helpersMiddleware';
 
 export default [
-  helperMiddleware()
+  helpersMiddleware
 ];

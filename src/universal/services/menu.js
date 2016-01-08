@@ -13,9 +13,10 @@ export const action = createAction({
 export default createReducer({menuOpen: false}, [
   {
     types: ['TOGGLE_MENU'],
-    reduce: (payload) => {
+    reduce: ({ payload }, state) => {
       const { menuOpen } = payload;
       return {
+        ...state,
         menuOpen
       };
     }

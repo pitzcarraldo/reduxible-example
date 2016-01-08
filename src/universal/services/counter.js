@@ -7,9 +7,10 @@ export const action = createAction({
 export default createReducer({count: 0}, [
   {
     types: ['INCREMENT'],
-    reduce: (payload, state) => {
+    reduce: ({ payload }, state) => {
       const { count } = state;
       return {
+        ...state,
         count: count + 1
       };
     }

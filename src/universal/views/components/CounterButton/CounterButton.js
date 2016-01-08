@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import { action } from '../../../actions/counter';
+import { action } from '../../../services/counter';
 
 @connect(
   state => ({ count: state.counter.count }),

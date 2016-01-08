@@ -1,4 +1,5 @@
 import Express from 'express';
+import cookieParser  from 'cookie-parser';
 import serveFavicon from 'serve-favicon';
 import serveStatic from 'serve-static';
 import compression from 'compression';
@@ -22,6 +23,7 @@ export default function (isomorphic) {
   app.use(compression());
   app.use(serveFavicon(path.join(__dirname, '..', '..', 'static', 'favicon.ico')));
   app.use(serveStatic(path.join(__dirname, '..', '..', 'static')));
+  app.use(cookieParser());
   app.use(reduxible.server());
 
   const server = app.listen(config.server.port, () => {

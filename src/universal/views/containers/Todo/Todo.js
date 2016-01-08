@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { action } from '../../../actions/todo';
+import { action } from '../../../services/todo';
 
 @connect(
   state => ({
