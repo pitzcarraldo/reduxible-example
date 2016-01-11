@@ -8,5 +8,5 @@ var context = path.resolve(__dirname, '..');
 isomorphic
   .development(config.development)
   .server(context, function() {
-    require('../src/server/server')(isomorphic);
+    require('../src/server/server').default(isomorphic);
   });

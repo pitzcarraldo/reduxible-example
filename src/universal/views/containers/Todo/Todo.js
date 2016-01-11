@@ -23,14 +23,12 @@ export default class Todo extends Component {
   };
 
   addTodo() {
-    const { addTodo } = this.props;
-    addTodo(this.state.todo);
+    this.props.addTodo(this.state.todo);
     this.setState({todo: ''});
   };
 
   removeTodo(e) {
-    const { removeTodo }= this.props;
-    removeTodo(e.target.dataset['index']);
+    this.props.removeTodo(e.target.dataset['index']);
   };
 
   handleChange(e) {
