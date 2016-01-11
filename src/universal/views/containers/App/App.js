@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Header, Footer, Nav } from '../../components/index';
-import { action } from '../../../services/menu';
+import { action as menuAction } from '../../../services/menu';
+import { action as authAction } from '../../../services/auth';
 
 @connect(
   state =>
@@ -10,7 +11,8 @@ import { action } from '../../../services/menu';
       menuOpen: state.menu.menuOpen
     }),
   {
-    toggleMenu: action('TOGGLE_MENU')
+    loadAuth: authAction('LOAD_AUTH'),
+    toggleMenu: menuAction('TOGGLE_MENU')
   }
 )
 export default class App extends Component {
@@ -18,6 +20,11 @@ export default class App extends Component {
     menuOpen: PropTypes.bool,
     toggleMenu: PropTypes.func
   };
+
+  componentWillMount() {
+    const { loadAuth } = this.props;
+    loadAuth();
+  }
 
   toggleMenu(e) {
     e.preventDefault();

@@ -24,6 +24,16 @@ export default class Nav extends Component {
                 </IndexLink>
               </li>
               <li>
+                <Link className="pure-menu-item pure-menu-link" to="login">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link className="pure-menu-item pure-menu-link" to="profile">
+                  Profile
+                </Link>
+              </li>
+              <li>
                 <Link className="pure-menu-item pure-menu-link" to="counter">
                   Counter
                 </Link>
@@ -31,11 +41,6 @@ export default class Nav extends Component {
               <li>
                 <Link className="pure-menu-item pure-menu-link" to="todo">
                   Todo
-                </Link>
-              </li>
-              <li>
-                <Link className="pure-menu-item pure-menu-link" to="about">
-                  About Me
                 </Link>
               </li>
             </ul>

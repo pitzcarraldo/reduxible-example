@@ -14,7 +14,6 @@ export const action = createAction({
           })
           .catch((res)=> {
             console.log(res);
-            return;
           });
       }
     }
@@ -30,7 +29,6 @@ export const action = createAction({
           })
           .catch((res)=> {
             console.log(res);
-            return;
           });
       }
     };
@@ -39,8 +37,7 @@ export const action = createAction({
     return {
       payload: {
         todos
-      },
-      helper: true
+      }
     };
   }
 });
