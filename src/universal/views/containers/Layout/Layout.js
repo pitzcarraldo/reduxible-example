@@ -15,7 +15,7 @@ import { action as authAction } from '../../../services/auth';
     toggleMenu: menuAction('TOGGLE_MENU')
   }
 )
-export default class App extends Component {
+export default class Layout extends Component {
   static propTypes = {
     menuOpen: PropTypes.bool,
     toggleMenu: PropTypes.func

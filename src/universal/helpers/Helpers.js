@@ -2,18 +2,22 @@ import HttpClient from './HttpClient';
 import CookieClient from './CookieClient';
 
 export default class Helpers {
-  constructor(req) {
-    if(req) {
-      this.req = req;
+  static INSTANCES = {
+    http: new HttpClient(),
+    cookie: new CookieClient()
+  };
+
+  static getInstances(req) {
+    return {
+      http: new HttpClient(req),
+      cookie: new CookieClient(req)
     }
   }
 
-  static helpers = {
-    http: HttpClient,
-    cookie: CookieClient
-  };
-
-  get(name) {
-    return new Helpers.helpers[name](this.req);
+  static getHelpers(req) {
+    if (req) {
+      return Helpers.getInstances(req);
+    }
+    return Helpers.INSTANCES;
   }
 }

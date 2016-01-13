@@ -3,8 +3,8 @@ import { createReducer, createAction } from 'reduxible';
 export const action = createAction({
   LOAD_AUTH: () => {
     return {
-      thunk: (dispatch, getState, helper) => {
-        const cookie = helper.get('cookie');
+      thunk: (dispatch, getState, helpers) => {
+        const { cookie } = helpers;
         const userCookie = cookie.get('user') || null;
         if(userCookie) {
           const user = JSON.parse(cookie.get('user'));
@@ -17,9 +17,8 @@ export const action = createAction({
   },
   LOGIN: (username) => {
     return {
-      thunk: (dispatch, getState, helper) => {
-        const http = helper.get('http');
-        const cookie = helper.get('cookie');
+      thunk: (dispatch, getState, helpers) => {
+        const { http, cookie } = helpers;
         http.post('http://localhost:8000/auth/login', {
             data: { username }
           })
@@ -35,9 +34,8 @@ export const action = createAction({
   },
   LOGOUT: () => {
     return {
-      thunk: (dispatch, getState, helper) => {
-        const http = helper.get('http');
-        const cookie = helper.get('cookie');
+      thunk: (dispatch, getState, helpers) => {
+        const { http, cookie } = helpers;
         const { username } = cookie.get('auth');
         http.post('http://localhost:8000/auth/logout', {
             data: { username }

@@ -22,18 +22,18 @@ export default class Todo extends Component {
     todo: ''
   };
 
-  addTodo() {
+  addTodo = () => {
     const { addTodo } = this.props;
     addTodo(this.state.todo);
     this.setState({todo: ''});
   };
 
-  removeTodo(e) {
+  removeTodo = (e) => {
     const { removeTodo }= this.props;
     removeTodo(e.target.dataset['index']);
   };
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({todo: e.target.value});
   };
 
@@ -42,10 +42,10 @@ export default class Todo extends Component {
     const { todo } = this.state;
     return (
       <div className="pure-form">
-        <input type="text" className="pure-input-rounded" placeholder="Add Todo Here" value={todo} onChange={::this.handleChange} />
-        <button className="pure-button-primary" onClick={::this.addTodo}>Add Todo</button>
+        <input type="text" className="pure-input-rounded" placeholder="Add Todo Here" value={todo} onChange={this.handleChange} />
+        <button className="pure-button-primary" onClick={this.addTodo}>Add Todo</button>
         <ul>
-          {todos.map((each, key) => { return <li key={key} data-index={key} onClick={::this.removeTodo}>{each}</li> })}
+          {todos.map((each, key) => { return <li key={key} data-index={key} onClick={this.removeTodo}>{each}</li> })}
         </ul>
       </div>);
   }

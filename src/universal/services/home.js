@@ -4,7 +4,7 @@ export const action = createAction({
   LOAD_CONTENT: () => {
     return {
       thunk: (dispatch, getState, helpers) => {
-        const http = helpers.get('http');
+        const { http } = helpers;
         http.get('http://localhost:8000/home')
           .then(({ data })=> {
             return dispatch(action('SET_CONTENT')(data));
