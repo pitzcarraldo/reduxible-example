@@ -1,14 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import { IndexLink, Link } from 'react-router';
+import { connect } from 'react-redux';
 
+@connect(
+  state =>
+    ({
+      user: state.auth.user
+    })
+)
 export default class Nav extends Component {
   static propTypes = {
     active: PropTypes.string,
-    toggleMenu: PropTypes.func
+    toggleMenu: PropTypes.func,
+    user: PropTypes.object
   };
 
   render() {
-    const { active, toggleMenu } = this.props;
+    const { active, toggleMenu, user } = this.props;
+
     return (
       <div>
         <a href="#menu" id="menuLink" className={`menu-link ${active}`} onClick={toggleMenu}>
@@ -23,16 +32,20 @@ export default class Nav extends Component {
                   Home
                 </IndexLink>
               </li>
+              {!user &&
               <li>
                 <Link className="pure-menu-item pure-menu-link" to="login">
                   Login
                 </Link>
               </li>
+              }
+              {user &&
               <li>
                 <Link className="pure-menu-item pure-menu-link" to="profile">
                   Profile
                 </Link>
               </li>
+              }
               <li>
                 <Link className="pure-menu-item pure-menu-link" to="counter">
                   Counter

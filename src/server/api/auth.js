@@ -3,27 +3,19 @@ import { encrypt, decrypt } from './crypto';
 
 const router = Express.Router();
 
-const userAuth = {};
-
-router.post('/login', function (req, res) {
-  const user = req.body.username;
-  const auth = encrypt(user);
-  if(userAuth[auth]) {
-    throw new Error('Already Exist User');
-  }
-  userAuth[auth] = user;
-  res.send(auth);
+router.post('/user', function (req, res) {
+  const auth = req.body.auth;
+  res.send(decrypt(auth));
 });
 
-router.delete('/logout', function (req, res) {
+router.post('/login', function (req, res) {
+  const username = req.body.username;
+  res.send(encrypt(username));
+});
+
+router.post('/logout', function (req, res) {
   const auth = req.body.auth;
-  const user = userAuth[auth];
-  if (user) {
-    res.send(user);
-    userAuth[auth] = null;
-  } else {
-    res.send(null);
-  }
+  res.send(decrypt(auth));
 });
 
 export default router;

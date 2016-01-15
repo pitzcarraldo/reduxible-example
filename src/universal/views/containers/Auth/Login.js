@@ -9,8 +9,10 @@ import { pushPath } from 'redux-simple-router';
   }),
   {
     loadAuth: action('LOAD_AUTH'),
-    login: action('LOGIN')
-  })
+    login: action('LOGIN'),
+    pushPath
+  }
+)
 export default class Login extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired
@@ -20,8 +22,23 @@ export default class Login extends Component {
     username: ''
   };
 
+  componentWillMount() {
+    this.handleAuth(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.handleAuth(nextProps);
+  }
+
+  handleAuth(props) {
+    const { user, pushPath } = props;
+    if (user) {
+      pushPath(`/profile`);
+    }
+  }
+
   handleUserName({ target: { value: username } }) {
-    this.setState({ username });
+    this.setState({username});
   }
 
   handleLogin(e) {

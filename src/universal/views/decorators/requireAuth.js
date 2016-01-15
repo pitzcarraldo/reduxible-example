@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { updatePath } from 'redux-simple-router';
+import { pushPath } from 'redux-simple-router';
 
 
 export default function requireAuth(ComposedComponent) {
   class AuthComponent extends Component {
     static propTypes = {
-      dispatch: PropTypes.func.isRequired,
       user: PropTypes.object,
-      location: PropTypes.object
+      location: PropTypes.object,
+      pushPath: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -16,9 +16,17 @@ export default function requireAuth(ComposedComponent) {
     }
 
     componentWillMount() {
-      const { user, dispatch } = this.props;
+      this.handleAuth(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+      this.handleAuth(nextProps);
+    }
+
+    handleAuth(props) {
+      const { user, pushPath } = props;
       if (!user) {
-        dispatch(updatePath(`/login?next=${this.props.location.pathname}`));
+        pushPath(`/login?next=${this.props.location.pathname}`);
       }
     }
 
@@ -28,7 +36,5 @@ export default function requireAuth(ComposedComponent) {
       );
     }
   }
-  return connect(state =>({
-    user: state.auth.user
-  }))(AuthComponent);
+  return connect(state =>({ user: state.auth.user }), { pushPath })(AuthComponent);
 }

@@ -6,12 +6,16 @@ class AuthRepository extends Repository {
     this.namespace = 'auth';
   }
 
+  findUserByAuth(auth) {
+    return this.client.post(this.api() + '/user', { data: { auth } });
+  }
+
   login(username) {
     return this.client.post(this.api() + '/login', { data: { username } });
   }
 
   logout(auth) {
-    return this.client.delete(this.api() + '/logout', { data: auth });
+    return this.client.post(this.api() + '/logout', { data: { auth } });
   }
 }
 export default Repository.getInstance(AuthRepository);

@@ -4,9 +4,8 @@ import Counter from './../views/containers/Counter/Counter';
 import Todo from './../views/containers/Todo/Todo';
 import Home from './../views/containers/Home/Home';
 import Login from './../views/containers/Auth/Login';
-import Logout from './../views/containers/Auth/Logout';
 import Profile from './../views/containers/Profile/Profile';
-import requireAuth from './../views/components/Auth/requireAuth';
+import requireAuth from './../views/decorators/requireAuth';
 
 export default [
   {
@@ -34,7 +33,7 @@ export default [
       },
       {
         path: 'profile',
-        component: requireAuth(Profile)
+        component: Profile
       }
     ]
   }

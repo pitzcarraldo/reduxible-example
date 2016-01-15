@@ -5,12 +5,12 @@ import AuthRepository from '../repositories/AuthRepository';
 export const action = createAction({
   LOAD_AUTH: () => {
     return {
-      thunk: (dispatch, getState, helpers) => {
-        const { cookie } = helpers;
-        const userCookie = cookie.get('user') || null;
-        if (userCookie) {
-          const user = JSON.parse(cookie.get('user'));
-          return dispatch(action('UPDATE_USER')(user));
+      thunk: async (dispatch, getState, helpers) => {
+        const { http, cookie } = helpers;
+        const auth = cookie.get('auth');
+        if (auth) {
+          const { data: username }  = await AuthRepository(http).findUserByAuth(auth);
+          return dispatch(action('UPDATE_USER')({ username }));
         } else {
           return dispatch(action('REMOVE_USER')());
         }
@@ -62,13 +62,13 @@ export const action = createAction({
   REMOVE_USER: () => {
     return {
       payload: {
-        user: {}
+        user: null
       }
     };
   }
 });
 
-export default createReducer({user: {}}, [
+export default createReducer({ user: null }, [
   {
     types: ['UPDATE_USER', 'REMOVE_USER'],
     reduce: ({ payload }, state) => {
