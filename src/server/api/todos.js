@@ -9,8 +9,8 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-  if (req.body && req.body.todo) {
-    todos.push(req.body.todo);
+  if (req.body && req.body.todos) {
+    todos.push(...req.body.todos);
   }
   res.send(todos);
 });

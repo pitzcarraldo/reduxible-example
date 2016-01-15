@@ -1,14 +1,13 @@
 import { createReducer, createAction } from 'reduxible';
+import HomeRepository from '../repositories/HomeRepository';
 
 export const action = createAction({
   LOAD_CONTENT: () => {
     return {
-      thunk: (dispatch, getState, helpers) => {
+      thunk: async (dispatch, getState, helpers) => {
         const { http } = helpers;
-        http.get('http://localhost:8000/home')
-          .then(({ data })=> {
-            return dispatch(action('SET_CONTENT')(data));
-          })
+        const { data: content } = await HomeRepository(http).findAll();
+        return dispatch(action('SET_CONTENT')(content));
       }
     }
   },

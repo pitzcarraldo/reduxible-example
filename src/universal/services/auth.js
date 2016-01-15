@@ -1,4 +1,6 @@
 import { createReducer, createAction } from 'reduxible';
+import AuthRepository from '../repositories/AuthRepository';
+
 
 export const action = createAction({
   LOAD_AUTH: () => {
@@ -6,7 +8,7 @@ export const action = createAction({
       thunk: (dispatch, getState, helpers) => {
         const { cookie } = helpers;
         const userCookie = cookie.get('user') || null;
-        if(userCookie) {
+        if (userCookie) {
           const user = JSON.parse(cookie.get('user'));
           return dispatch(action('UPDATE_USER')(user));
         } else {
@@ -17,36 +19,36 @@ export const action = createAction({
   },
   LOGIN: (username) => {
     return {
-      thunk: (dispatch, getState, helpers) => {
-        const { http, cookie } = helpers;
-        http.post('http://localhost:8000/auth/login', {
-            data: { username }
-          })
-          .then(({data})=> {
-            cookie.set('user', JSON.stringify(data));
-            return dispatch(action('UPDATE_USER')(data));
-          })
-          .catch((res)=> {
-            console.log(res);
-          });
+      thunk: async (dispatch, getState, helpers) => {
+        try {
+          const { http, cookie } = helpers;
+          const { data: auth } = await AuthRepository(http).login(username);
+          const user = {
+            username,
+            auth
+          };
+          cookie.set('auth', auth);
+          return dispatch(action('UPDATE_USER')(user));
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   },
   LOGOUT: () => {
     return {
-      thunk: (dispatch, getState, helpers) => {
-        const { http, cookie } = helpers;
-        const { username } = cookie.get('auth');
-        http.post('http://localhost:8000/auth/logout', {
-            data: { username }
-          })
-          .then(()=> {
-            cookie.remove('user');
+      thunk: async (dispatch, getState, helpers) => {
+        try {
+          const { http, cookie } = helpers;
+          const auth = cookie.get('auth');
+          const { data: username } = await AuthRepository(http).logout(auth);
+          if (username) {
+            cookie.remove('auth');
             return dispatch(action('REMOVE_USER')());
-          })
-          .catch((res)=> {
-            console.log(res);
-          });
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
   },

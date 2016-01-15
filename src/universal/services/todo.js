@@ -1,37 +1,22 @@
 import { createReducer, createAction } from 'reduxible';
-import TodoRepository from '../repositories/todoRepository';
+import TodoRepository from '../repositories/TodoRepository';
 
 export const action = createAction({
   ADD_TODO: (todo) => {
     return {
-      thunk: (dispatch, getState, helpers) => {
+      thunk: async (dispatch, getState, helpers) => {
         const { http }  = helpers;
-        console.log(TodoRepository());
-        http.post('http://localhost:8000/todos', {
-            data: {todo}
-          })
-          .then((res)=> {
-            const todos = res.data;
-            return dispatch(action('UPDATE_TODOS')(todos));
-          })
-          .catch((res)=> {
-            console.log(res);
-          });
+        const { data: todos } = await TodoRepository(http).save(todo);
+        return dispatch(action('UPDATE_TODOS')(todos));
       }
     }
   },
   REMOVE_TODO: (index) => {
     return {
-      thunk: (dispatch, getState, helpers) => {
+      thunk: async (dispatch, getState, helpers) => {
         const { http } = helpers;
-        http.delete('http://localhost:8000/todos/' + index)
-          .then((res)=> {
-            const todos = res.data;
-            return dispatch(action('UPDATE_TODOS')(todos));
-          })
-          .catch((res)=> {
-            console.log(res);
-          });
+        const { data: todos } = await TodoRepository(http).remove(index);
+        return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
   },

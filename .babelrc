@@ -1,4 +1,4 @@
 {
   "plugins": ["typecheck", "transform-runtime", "transform-decorators-legacy", "transform-es2015-modules-commonjs"],
-  "presets": ["es2015", "stage-0", "react"]
+  "presets": ["es2015", "es2015-loose","stage-0", "react"]
 }
