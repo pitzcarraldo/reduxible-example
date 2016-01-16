@@ -5,7 +5,8 @@ import TodoItem from './TodoItem';
 
 @connect(
   state => ({
-    todos: state.todo.todos
+    todos: state.todo.todos,
+    user: state.auth.user
   }),
   {
     getTodo: action('GET_TODO'),
@@ -17,6 +18,7 @@ import TodoItem from './TodoItem';
 export default class TodoList extends Component {
   static propTypes = {
     todos: PropTypes.object,
+    user: PropTypes.object,
     addTodo: PropTypes.func.isRequired,
     toggleTodo: PropTypes.func.isRequired,
     removeTodo: PropTypes.func.isRequired
@@ -49,7 +51,7 @@ export default class TodoList extends Component {
 
   render() {
     const styles = require('./TodoList.scss');
-    const { todos } = this.props;
+    const { todos, user } = this.props;
     const { todo } = this.state;
     return (
       <div className={styles['todo-list']}>
@@ -62,6 +64,7 @@ export default class TodoList extends Component {
             {Object.keys(todos).map(
               (id, key) =>
                 <TodoItem key={id} id={id} todo={todos[id]}
+                          user={user}
                           removeTodo={this.removeTodo}
                           toggleTodo={this.toggleTodo}
                 />

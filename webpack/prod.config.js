@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var babelConfig = require('./babel.config');
 var strip = require('strip-loader');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var isomorphic = require('./isomorphic').plugin;
@@ -36,7 +35,8 @@ module.exports = {
           'style',
           $q({
             'css': {
-              sourceMap: true
+              sourceMap: true,
+              importLoaders: 1
             },
             'sass': {
               sourceMap: true,

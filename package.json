@@ -76,7 +76,7 @@
     "eslint-plugin-react": "^3.10.0",
     "expect": "^1.13.0",
     "express-http-proxy": "^0.6.0",
-    "extract-text-webpack-plugin": "^0.9.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "mocha": "^2.3.4",
     "node-sass": "^3.4.2",
@@ -92,7 +92,7 @@
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.6",
+    "webpack": "^1.12.11",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0",
     "webpack-querify": "^0.0.1"

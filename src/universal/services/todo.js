@@ -12,13 +12,15 @@ export const action = createAction({
     }
   },
   ADD_TODO: (text) => {
-    const todo = {};
-    todo[new Date().getTime()] = {
-      text,
-      complete: false
-    };
     return {
       thunk: async (dispatch, getState, helpers) => {
+        const user = getState().auth.user || {};
+        const todo = {};
+        todo[new Date().getTime()] = {
+          user,
+          text,
+          complete: false
+        };
         const { http }  = helpers;
         const { data: todos } = await TodoRepository(http).save(todo);
         return dispatch(action('UPDATE_TODOS')(todos));
@@ -29,7 +31,8 @@ export const action = createAction({
     return {
       thunk: async (dispatch, getState, helpers) => {
         const todo = {};
-        todo[id] = { complete: !getState().todo.todos[id].complete };
+        const currentTodo = getState().todo.todos[id];
+        todo[id] = { complete: !currentTodo.complete };
         const { http }  = helpers;
         const { data: todos } = await TodoRepository(http).save(todo);
         return dispatch(action('UPDATE_TODOS')(todos));

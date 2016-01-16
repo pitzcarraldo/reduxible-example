@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Header, Footer, Nav } from '../../components/index';
 import { action as menuAction } from '../../../services/menu';
 import { action as authAction } from '../../../services/auth';
-import '../../../styles/base.scss';
+import '../../../commons/styles.scss';
 
 @connect(
   state =>

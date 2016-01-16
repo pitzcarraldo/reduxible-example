@@ -16,7 +16,7 @@ import { action as authAction } from '../../../services/auth';
 @requireAuth
 export default class Profile extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     logout: PropTypes.func.isRequired
   };
 
