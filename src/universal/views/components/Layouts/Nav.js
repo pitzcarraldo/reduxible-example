@@ -27,11 +27,6 @@ export default class Nav extends Component {
           <div className="pure-menu">
             <IndexLink className="pure-menu-heading" to="/">Reduxible</IndexLink>
             <ul className="pure-menu-list">
-              <li>
-                <IndexLink className="pure-menu-item pure-menu-link" to="/">
-                  Home
-                </IndexLink>
-              </li>
               {!user &&
               <li>
                 <Link className="pure-menu-item pure-menu-link" to="login">
@@ -47,13 +42,13 @@ export default class Nav extends Component {
               </li>
               }
               <li>
-                <Link className="pure-menu-item pure-menu-link" to="counter">
-                  Counter
+                <Link className="pure-menu-item pure-menu-link" to="todo">
+                  Todo
                 </Link>
               </li>
               <li>
-                <Link className="pure-menu-item pure-menu-link" to="todo">
-                  Todo
+                <Link className="pure-menu-item pure-menu-link" to="counter">
+                  Counter
                 </Link>
               </li>
             </ul>

@@ -5,14 +5,18 @@ class TodoRepository extends Repository {
     this.namespace = 'todos';
   }
 
-  save(...todos) {
+  findAll() {
+    return this.client.get(this.api());
+  }
+
+  save(todos) {
     return this.client.post(this.api(), {
       data: {todos}
     });
   }
 
-  remove(index) {
-    return this.client.delete(this.api() + `/${index}`);
+  remove(id) {
+    return this.client.delete(this.api() + `/${id}`);
   }
 }
 export default Repository.getInstance(TodoRepository);

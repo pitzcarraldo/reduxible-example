@@ -1,7 +1,12 @@
-@import "../../node_modules/purecss/build/pure-min.css";
+@import "../../../node_modules/purecss/build/pure-min.css";
 
 body {
   color: #777;
+}
+
+.pure-g-valign-fix {
+  display: block;
+  text-align: center;
 }
 
 .pure-img-responsive {

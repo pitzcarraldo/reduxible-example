@@ -37,24 +37,26 @@ export default class Login extends Component {
     }
   }
 
-  handleUserName({ target: { value: username } }) {
+  handleUserName = ({ target: { value: username } }) => {
     this.setState({username});
-  }
+  };
 
-  handleLogin(e) {
+  handleLogin = (e) => {
     const { login } = this.props;
     login(this.state.username);
-  }
+  };
 
   render() {
     const { username } = this.state;
     return (
       <div className="content">
-        <h2 className="content-subhead">Login</h2>
-        <div className="pure-form">
-          <input type="text" className="pure-input-rounded" placeholder="User Name Here" value={username}
-                 onChange={::this.handleUserName}/>
-          <button className="pure-button-primary" onClick={::this.handleLogin}>Login</button>
+        <div className='pure-g-valign-fix'>
+          <h2 className="content-subhead">Login</h2>
+          <div className="pure-form">
+            <input type="text" className="pure-input-rounded" placeholder="User Name Here" value={username}
+                   onChange={this.handleUserName}/>
+            <button className="pure-button-primary" onClick={this.handleLogin}>Login</button>
+          </div>
         </div>
       </div>
     );

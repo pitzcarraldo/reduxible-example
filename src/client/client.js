@@ -1,6 +1,5 @@
 import Application from '../universal/Application';
 import config from '../../config/index';
-import './pure.scss';
 
 const app = new Application({
   server: false,

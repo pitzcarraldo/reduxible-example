@@ -29,10 +29,12 @@ export default class Profile extends Component {
     const username = (user && user.username) || '';
     return (
       <div className="content">
-        <h1>Profile</h1>
-        <h2>Hi {username}!</h2>
-        <div className="pure-form">
-          <button className="pure-button-primary" onClick={this.handleLogout}>Logout</button>
+        <div className='pure-g-valign-fix'>
+          <h1>Profile</h1>
+          <h2>Hi {username}!</h2>
+          <div className="pure-form">
+            <button className="pure-button-primary" onClick={this.handleLogout}>Logout</button>
+          </div>
         </div>
       </div>
     );
