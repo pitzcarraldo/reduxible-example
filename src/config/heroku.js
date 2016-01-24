@@ -10,5 +10,8 @@ export default {
   api: {
     host: process.env.HOST || 'reduxible.herokuapp.com',
     port: ''
+  },
+  ga: {
+    id: process.env.GA_TRACKING_ID || ''
   }
 };

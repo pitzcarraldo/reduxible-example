@@ -14,5 +14,8 @@ export default {
   api: {
     host: 'localhost',
     port: 8080
+  },
+  ga: {
+    id: process.env.GA_TRACKING_ID || ''
   }
 };

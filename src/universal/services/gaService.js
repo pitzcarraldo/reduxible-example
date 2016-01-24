@@ -8,7 +8,7 @@ let reducer;
 if (config.server.current) {
   reducer = createReducer({}, []);
 } else {
-  ga.initialize(process.env.GA_TRACKING_ID || '');
+  ga.initialize(config.ga.id);
   reducer = createReducer({}, [
     {
       types: [UPDATE_PATH],
