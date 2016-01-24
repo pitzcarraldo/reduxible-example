@@ -1,0 +1,24 @@
+### JetBrains template
+.idea/
+*.iml
+*.ipr
+*.iws
+
+### Node template
+logs
+*.log
+npm-debug.log*
+node_modules
+pids
+*.pid
+*.seed
+
+# Compiled binary
+build/Release
+dist
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# webpack-isomorphic-tools
+webpack-*.json

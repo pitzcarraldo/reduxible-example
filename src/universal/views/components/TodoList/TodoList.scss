@@ -1,0 +1,21 @@
+.todo-list {
+  margin: auto;
+  max-width: 400px;
+}
+
+.todo-item {
+  text-align: left;
+}
+
+.todo-item-complete {
+  text-decoration: line-through;
+}
+
+.todo-item-remove {
+  display: inline-block;
+  float: right;
+  font-weight: bold;
+  background: transparent;
+  color: rgb(202, 60, 60);
+  font-size: 50%;
+}

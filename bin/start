@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+require('babel-core/register');
+var path = require('path');
+var config = require('../src/config/index');
+var isomorphic = require('../webpack/isomorphic');
+
+var context = path.resolve(__dirname, '..');
+isomorphic
+  .development(config.development)
+  .server(context, function() {
+    require('../src/server/server')(isomorphic);
+  });

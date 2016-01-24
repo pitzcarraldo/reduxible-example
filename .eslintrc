@@ -1,0 +1,10 @@
+{
+  "extends": "rackt",
+  "rules": {
+    "comma-dangle": [2, "never"],
+    "valid-jsdoc": 2,
+    "no-var": 0,
+    "no-console": 0,
+    "semi": [ 2, "always" ]
+  }
+}
