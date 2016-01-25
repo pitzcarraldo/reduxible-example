@@ -19,11 +19,13 @@ export default class Html extends Component {
 
   render() {
     const { component, store, isomorphic } = this.props;
+    const state = store && store.getState() || {};
     const assets = isomorphic.assets();
     const content = component ? ReactDOM.renderToString(component) : '';
     return (
       <html>
       <head>
+        <title>Reduxible Example</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
         {assets.styles.app && <link href={assets.styles.app} rel="stylesheet" charSet="UTF-8"/>}
@@ -32,7 +34,7 @@ export default class Html extends Component {
       </head>
       <body>
       <div id="content" dangerouslySetInnerHTML={{ __html: content }}></div>
-      <script dangerouslySetInnerHTML={{  __html: `window.__state=${ serialize(store.getState()) };` }} charSet="UTF-8">
+      <script dangerouslySetInnerHTML={{  __html: `window.__state=${ serialize(state) };` }} charSet="UTF-8">
       </script>
       {assets.javascript.app && <script src={assets.javascript.app} charSet="UTF-8"></script>}
       </body>

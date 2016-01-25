@@ -26,7 +26,7 @@ export default class Home extends Component {
     const train = require('./imgs/train.jpg');
     return (
       <div className="content">
-        {content.map((each, key) =>
+        {content && content.map((each, key) =>
           <div key={key}>
             <h2 className="content-subhead">{each.title}</h2>
             <p>{each.description}</p>

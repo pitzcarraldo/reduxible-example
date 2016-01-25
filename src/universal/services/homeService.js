@@ -21,7 +21,7 @@ export const action = createAction({
 });
 
 const initialState = {
-  content: {}
+  content: []
 };
 
 export default createReducer(initialState, [
