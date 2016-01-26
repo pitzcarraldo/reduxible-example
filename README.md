@@ -26,4 +26,4 @@ open http://localhost:8080
 
 ## Running Example on the Heroku
 
-[Reduxible Universal SPA Example](http://reduxible-spa.herokuapp.com/)
+[Reduxible + Spring Boot Example](http://reduxible-spring.herokuapp.com/)
