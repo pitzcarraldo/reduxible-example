@@ -27,5 +27,5 @@ open http://localhost:8080
 
 ## Running Example on the Heroku
 
-* [Reduxible Universal Example](http://reduxible.herokuapp.com/)
-* [Reduxible Universal Single Page Application Example](http://reduxible-spa.herokuapp.com/)
+* [Reduxible Universal Application Example](http://reduxible.herokuapp.com/)
+* [Reduxible Single Page Application Example](http://reduxible-spa.herokuapp.com/)
