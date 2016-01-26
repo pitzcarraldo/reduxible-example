@@ -1,8 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
-var babelConfig = require('./babel.config');
-var isomorphic = require('./isomorphic').plugin;
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var $q = require('webpack-querify');
+var babelConfig = require('./babel.config');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -12,14 +12,14 @@ module.exports = {
     app: [
       'webpack-hot-middleware/client',
       './src/commons/commons.js',
-      './src/client/client.js'
+      './src/index.js'
     ]
   },
   output: {
-    path: path.join(__dirname, '..', 'static', 'dist'),
+    path: path.join(__dirname, '..', 'dist'),
     filename: '[name]-[hash].js',
-    chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/dist/'
+    chunkFilename: '[name]-[hash].js',
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -34,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)/,
-        exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        exclude: path.join(__dirname, '..', 'src', 'app', 'views'),
         loader: $q({
           style: {},
           css: {
@@ -52,7 +52,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        include: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        include: path.join(__dirname, '..', 'src', 'app', 'views'),
         loader: $q({
           style: {},
           css: {
@@ -71,7 +71,7 @@ module.exports = {
         })
       },
       {
-        test: isomorphic.regular_expression('images'),
+        test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url-loader',
         query: {
           limit: 10240
@@ -84,15 +84,19 @@ module.exports = {
     }]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/index.html',
+      favicon: 'src/favicon.ico',
+      inject: false
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-        CLIENT: true
+        NODE_ENV: JSON.stringify('development')
       }
-    }),
-    isomorphic.development()
+    })
   ]
 };

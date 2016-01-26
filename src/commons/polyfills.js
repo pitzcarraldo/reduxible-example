@@ -7,4 +7,4 @@ import './polyfills/modernizr';
 import 'script!respond.js/dest/respond.min';
 import 'compose-dataset-shim';
 import 'eventsource-polyfill';
-import 'console-polyfill';
+import 'script!console-polyfill';

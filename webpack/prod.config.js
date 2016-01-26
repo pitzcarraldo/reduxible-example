@@ -1,8 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var strip = require('strip-loader');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var isomorphic = require('./isomorphic').plugin;
 var $q = require('webpack-querify');
 
 module.exports = {
@@ -12,14 +12,14 @@ module.exports = {
     polyfills: './src/commons/polyfills.js',
     app: [
       './src/commons/commons.js',
-      './src/client/client.js'
+      './src/index.js'
     ]
   },
   output: {
-    path: path.join(__dirname, '..', 'static', 'dist'),
+    path: path.join(__dirname, '..', 'dist'),
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -34,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)/,
-        exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        exclude: path.join(__dirname, '..', 'src', 'app', 'views'),
         loader: ExtractTextPlugin.extract(
           'style',
           $q({
@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)/,
-        include: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        include: path.join(__dirname, '..', 'src', 'app', 'views'),
         loader: ExtractTextPlugin.extract(
           'style',
           $q({
@@ -75,7 +75,7 @@ module.exports = {
         )
       },
       {
-        test: isomorphic.regular_expression('images'),
+        test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url-loader',
         query: {
           limit: 10240
@@ -89,6 +89,12 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/index.html',
+      favicon: 'src/favicon.ico',
+      inject: false
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -96,15 +102,13 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
         HOST: JSON.stringify(process.env.HOST),
         GA_TRACKING_ID: JSON.stringify(process.env.GA_TRACKING_ID),
-        PORT: process.env.PORT,
-        CLIENT: true
+        PORT: process.env.PORT
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       mangle: false,
       minimize: false
-    }),
-    isomorphic
+    })
   ]
 };

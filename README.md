@@ -1,6 +1,6 @@
-# REDUXIBLE EXAMPLE
+# REDUXIBLE SINGLE PAGE APP EXAMPLE
 
-This is the example of the Reduxible. It contains counter and todo list sample that built with Reduxible. (React, Redux, and other things that related with them.) Many codes in this example are based on [react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example).
+This is the single page app example that built by the Reduxible. It contains counter and todo list sample that built with Reduxible. (React, Redux, and other things that related with them.) Many codes in this example are based on [react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example).
 
 ## You can check on this example
 
@@ -10,6 +10,7 @@ This is the example of the Reduxible. It contains counter and todo list sample t
 * Login Authentication by HTTP and Cookie.
 * Todo List with User privileges.
 * Simple Counter.
+* **Even can be run in the Internet Explorer 8!**
 
 ## How to run this
 
@@ -23,4 +24,4 @@ open http://localhost:8080
 
 ## Running Example on the Heroku
 
-[Reduxible Universal Example](http://reduxible.herokuapp.com/)
+[Reduxible Universal SPA Example](http://reduxible-spa.herokuapp.com/)

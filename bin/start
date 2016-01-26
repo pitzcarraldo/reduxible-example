@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 require('babel-core/register');
-var path = require('path');
-var config = require('../src/config/index');
-var isomorphic = require('../webpack/isomorphic');
+require('babel-core/polyfill');
 
-var context = path.resolve(__dirname, '..');
-isomorphic
-  .development(config.development)
-  .server(context, function() {
-    require('../src/server/server')(isomorphic);
-  });
+var config = require('../src/config/index');
+var server = require('./server');
+
+if (config.development) {
+  var devServer = require('./devServer.js');
+  devServer(server);
+}
+
+var listener = server.listen(config.server.port, () => {
+  var host = listener.address().address;
+  var port = listener.address().port;
+  console.log('Server listening at http://%s:%s', host, port);
+});
