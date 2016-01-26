@@ -14,7 +14,6 @@ pids
 *.seed
 
 # Compiled binary
-build/Release
 dist
 
 # Coverage directory used by tools like istanbul
@@ -22,3 +21,9 @@ coverage
 
 # webpack-isomorphic-tools
 webpack-*.json
+
+# Gradle
+out
+build
+.gradle
+src/main/webapp

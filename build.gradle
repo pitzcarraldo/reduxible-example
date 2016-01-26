@@ -1,0 +1,86 @@
+buildscript {
+    ext {
+        springBootVersion = '1.3.2.RELEASE'
+        springLoadedVersion = '1.2.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2" }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.springframework:springloaded:${springLoadedVersion}"
+        classpath "com.moowork.gradle:gradle-node-plugin:0.11"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+apply plugin: 'spring-boot' 
+apply plugin: 'war'
+apply plugin: 'com.moowork.node'
+
+
+war {
+    baseName = 'reduxible-spring-example'
+    version = '0.0.2-beta'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.ning:async-http-client:1.9.31')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    runtime('org.springframework:springloaded:1.2.5.RELEASE')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.easytesting:fest-assert-core:2.0M10')
+}
+
+dependencyManagement {
+	imports { 
+		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Brixton.M2" 
+	}
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+
+eclipse {
+    classpath {
+         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
+node {
+  version = '4.2.5'
+  npmVersion = '3.5.0'
+  distBaseUrl = 'https://nodejs.org/dist'
+  download = true
+  workDir = file("${project.buildDir}/nodejs")
+  nodeModulesDir = file("${project.projectDir}/client")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
