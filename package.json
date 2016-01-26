@@ -13,7 +13,6 @@
     "dev:server": "./gradlew bootRun",
     "postinstall": "webpack --display-error-details --config client/webpack/prod.config.js",
     "prod": "npm run build && ./gradlew bootRun",
-    "heroku": "NODE_ENV=heroku node bin/start",
     "start": "node bin/start"
   },
   "repository": {

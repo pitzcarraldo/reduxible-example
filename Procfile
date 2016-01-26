@@ -1,1 +1,1 @@
-web: npm run heroku
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/reduxible-spring-example-0.0.2-beta.war
