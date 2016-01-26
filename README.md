@@ -11,6 +11,10 @@ This is the example of the Reduxible. It contains counter and todo list sample t
 * Todo List with User privileges.
 * Simple Counter.
 
+## Other Examples
+ 
+* [Single Page Application Example.](https://github.com/Pitzcarraldo/reduxible-example/tree/spa)
+
 ## How to run this
 
 ```bash
@@ -23,4 +27,5 @@ open http://localhost:8080
 
 ## Running Example on the Heroku
 
-[Reduxible Universal Example](http://reduxible.herokuapp.com/)
+* [Reduxible Universal Example](http://reduxible.herokuapp.com/)
+* [Reduxible Universal Single Page Application Example](http://reduxible-spa.herokuapp.com/)
