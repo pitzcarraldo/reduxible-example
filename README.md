@@ -4,7 +4,7 @@ This is the single page app example that built by the Reduxible. It contains cou
 
 ## You can check on this example
 
-* The Universal Web Application that built with React and Redux by Traditional Development Way using ES 2015.
+* The Single Page Web Application that built with React and Redux by Traditional Development Way using ES 2015.
     * Codes are composed with Route, Service, Repository and View structure that similar with Spring or Angular Applications.
 * Universal Helpers for use HTTP and Cookie Access.
 * Login Authentication by HTTP and Cookie.
@@ -24,4 +24,4 @@ open http://localhost:8080
 
 ## Running Example on the Heroku
 
-[Reduxible Universal SPA Example](http://reduxible-spa.herokuapp.com/)
+[Reduxible Single Page Application Example](http://reduxible-spa.herokuapp.com/)
