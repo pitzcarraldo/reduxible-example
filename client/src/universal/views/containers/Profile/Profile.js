@@ -31,7 +31,7 @@ export default class Profile extends Component {
       <div className="content">
         <div className="pure-g-valign-fix">
           <h1>Profile</h1>
-          <h2>Hi {username}!!!</h2>
+          <h2>Hi {username}!</h2>
           <div className="pure-form">
             <button className="pure-button-primary" onClick={this.handleLogout}>Logout</button>
           </div>

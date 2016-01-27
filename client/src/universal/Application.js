@@ -1,17 +1,24 @@
 import Reduxible from 'reduxible';
+import Html from './views/containers/Html';
+import Error from './views/containers/Error/Error';
 import routes from './routes/index';
 import middlewares from './middlewares/index';
 import reducers from './services/reducers';
+import initialActions from './services/initialActions';
 
 export default class Application extends Reduxible {
   constructor(config) {
     super({
       config,
+      container: Html,
+      errorContainer: Error,
       devTools: config.devTools ? require('./helpers/DevTools') : '',
       routes,
       middlewares,
       reducers,
-      reloader: Application.reloader
+      reloader: Application.reloader,
+      //initialActions,
+      extras: config.extras
     });
   }
 

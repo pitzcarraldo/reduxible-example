@@ -20,10 +20,10 @@ dist
 coverage
 
 # webpack-isomorphic-tools
+/src/main/resources/static/dist
 webpack-*.json
 
 # Gradle
 out
 build
 .gradle
-src/main/webapp

@@ -1,19 +1,19 @@
 import { createReducer, createAction } from 'reduxible';
-import TodoRepository from '../repositories/TodoRepository';
+import TodoRepository from "../repositories/TodoRepository";
 
 export const action = createAction({
   GET_TODO: () => {
     return {
-      thunk: async (dispatch, getState, helpers) => {
-        const { http }  = helpers;
-        const todos = await (await TodoRepository(http).findAll()).json();
+      thunk: async(dispatch, getState, helpers) => {
+        const {http}  = helpers;
+        const {data : todos } = await TodoRepository(http).findAll();
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
   },
   ADD_TODO: (text) => {
     return {
-      thunk: async (dispatch, getState, helpers) => {
+      thunk: async(dispatch, getState, helpers) => {
         const user = getState().auth.user || {};
         const todo = {};
         todo[new Date().getTime()] = {
@@ -21,29 +21,29 @@ export const action = createAction({
           text,
           complete: false
         };
-        const { http }  = helpers;
-        const todos = await (await TodoRepository(http).save(todo)).json();
+        const {http}  = helpers;
+        const {data : todos } = await TodoRepository(http).save(todo);
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
   },
   TOGGLE_TODO: (id) => {
     return {
-      thunk: async (dispatch, getState, helpers) => {
+      thunk: async(dispatch, getState, helpers) => {
         const todo = {};
         const currentTodo = getState().todo.todos[id];
         todo[id] = {complete: !currentTodo.complete};
-        const { http }  = helpers;
-        const todos = await (await TodoRepository(http).save(todo)).json();
+        const {http}  = helpers;
+        const {data : todos } = await TodoRepository(http).save(todo);
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
   },
   REMOVE_TODO: (id) => {
     return {
-      thunk: async (dispatch, getState, helpers) => {
-        const { http } = helpers;
-        const todos = await (await TodoRepository(http).remove(id)).json();
+      thunk: async(dispatch, getState, helpers) => {
+        const {http} = helpers;
+        const {data:  todos } = await TodoRepository(http).remove(id);
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
@@ -64,8 +64,8 @@ const initialState = {
 export default createReducer(initialState, [
   {
     types: ['UPDATE_TODOS'],
-    reduce: ({ payload }, state) => {
-      const { todos } = payload;
+    reduce: ({payload}, state) => {
+      const {todos} = payload;
       return {
         ...state,
         todos

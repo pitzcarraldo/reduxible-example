@@ -1,12 +1,11 @@
 import 'babel-core/polyfill';
-import Application from './app/Application';
-import config from './config/index';
+import Application from '../universal/Application';
+import config from '../config/index';
 
 const app = new Application({
   server: false,
-  universal: false,
-  hashHistory: true,
   development: config.development,
+  universal: config.universal,
   devTools: config.devTools
 });
 

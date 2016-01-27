@@ -2,7 +2,10 @@ import config from '../../config/index';
 
 export default class Repository {
   constructor(options) {
-    this.apiServer = config.api ? `//${config.api.host}:${config.api.port}` : '';
+    this.protocol = config.server.current ? 'http:': '';
+    this.port = config.api.port ? ':' + config.api.port : '';
+    //this.apiServer = config.server.current ? `${this.protocol}//${config.api.host}${this.port}` : '';
+    this.apiServer = `http://localhost:8080`;
     this.client = options.client;
   }
 

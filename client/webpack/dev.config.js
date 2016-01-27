@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var isomorphic = require('./isomorphic').plugin;
 var $q = require('webpack-querify');
 var babelConfig = require('./babel.config.js');
 var context = path.resolve(__dirname, '..', '..');
@@ -14,7 +14,7 @@ module.exports = {
     app: [
       'webpack-hot-middleware/client',
       $j(context, 'client', 'src', 'commons', 'commons.js'),
-      $j(context, 'client', 'src', 'index.js')
+      $j(context, 'client', 'src', 'client', 'client.js')
     ]
   },
   output: {
@@ -73,7 +73,7 @@ module.exports = {
         })
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: isomorphic.regular_expression('images'),
         loader: 'url-loader',
         query: {
           limit: 10240
@@ -86,12 +86,6 @@ module.exports = {
     }]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: $j('client', 'src', 'index.html'),
-      favicon: $j('client', 'src', 'favicon.ico'),
-      inject: false
-    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -99,6 +93,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
-    })
+    }),
+    isomorphic.development()
   ]
 };

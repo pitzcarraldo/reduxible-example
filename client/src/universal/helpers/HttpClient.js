@@ -1,4 +1,4 @@
-import 'universal-fetch';
+import axios from 'axios';
 
 export default class HttpClient {
   constructor(req) {
@@ -7,8 +7,9 @@ export default class HttpClient {
         this[method] = (url, options) => {
           const request = {};
 
+          request.url = url;
           request.method = method;
-          request.timeout = 5000;
+          request.timeout = 1000;
 
           if (options && options.headers) {
             request.headers = {...options.headers};
@@ -20,15 +21,10 @@ export default class HttpClient {
           }
 
           if (options && options.data) {
-            request.headers = {
-              ...request.headers,
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            };
-            request.body = JSON.stringify(options.data);
+            request.data = options.data;
           }
 
-          return fetch(url, request);
+          return axios(request);
         };
       });
   }

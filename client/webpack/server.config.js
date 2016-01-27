@@ -5,16 +5,14 @@ var base = require('./prod.base.config');
 
 module.exports = Object.assign({
   entry: {
-    polyfills: $j(context, 'client', 'src', 'commons', 'polyfills.js'),
-    app: [
-      $j(context, 'client', 'src', 'commons', 'commons.js'),
-      $j(context, 'client', 'src', 'client', 'client.js')
-    ]
+    server: $j(context, 'client', 'src', 'server', 'server.js')
   },
   output: {
+    library: 'render',
+    libraryTarget: 'this',
     path: $j(context, 'src', 'main', 'resources', 'static', 'dist'),
-    filename: '[name]-[chunkhash].js',
-    chunkFilename: '[name]-[chunkhash].js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     publicPath: '/dist/'
   }
 }, base);
