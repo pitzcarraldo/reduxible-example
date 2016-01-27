@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * @author Alan(Minkyu Cho)
+ * @author Minkyu Cho(mrnoname@naver.com)
  */
 @RestController
 @RequestMapping("/api/auth")

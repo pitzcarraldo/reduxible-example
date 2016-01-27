@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 /**
- * @author Alan(Minkyu Cho)
+ * @author Minkyu Cho(mrnoname@naver.com)
  */
 @Service
 public class AuthService {
