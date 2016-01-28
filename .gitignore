@@ -20,6 +20,7 @@ dist
 coverage
 
 # webpack-isomorphic-tools
+/classes
 /src/main/resources/static/dist
 webpack-*.json
 
