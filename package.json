@@ -1,6 +1,6 @@
 {
   "name": "reduxible-example",
-  "version": "0.0.2-beta.1",
+  "version": "0.0.2",
   "description": "Example of The Universal Web Application based on Reduxible.",
   "scripts": {
     "clean": "rimraf dist static/dist",
@@ -75,7 +75,7 @@
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.1",
     "redux-simple-router": "^1.0.2",
-    "reduxible": "0.0.2-beta.1",
+    "reduxible": "0.0.2",
     "respond.js": "^1.4.2",
     "rimraf": "^2.4.4",
     "sass-loader": "^3.1.2",
