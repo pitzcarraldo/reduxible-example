@@ -29,7 +29,7 @@ or
 npm run prod
 open http://localhost:8080
 
-#If doesn't work, do ./gradlew clean and try again.
+#If doesn't work, do './gradlew clean' and try again.
 ```
 
 ## Running Example on the Heroku
