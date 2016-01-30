@@ -14,25 +14,27 @@ import java.util.Map;
 @Getter
 @Setter
 public class RouteRequest {
-	private final HttpServletRequest REQUEST;
-	private Map<String, String> cookies = new HashMap<>();
+  private final HttpServletRequest REQUEST;
+  private Map<String, String> cookies = new HashMap<>();
 
-	public RouteRequest(HttpServletRequest request) {
-		this.REQUEST = request;
-		for (Cookie cookie : request.getCookies()) {
-			cookies.put(cookie.getName(), cookie.getValue());
-		}
-	}
+  public RouteRequest(HttpServletRequest request) {
+    this.REQUEST = request;
+    if (request.getCookies() != null) {
+      for (Cookie cookie : request.getCookies()) {
+        cookies.put(cookie.getName(), cookie.getValue());
+      }
+    }
+  }
 
-	public String getOriginalUrl() {
-		return REQUEST.getRequestURI();
-	}
+  public String getOriginalUrl() {
+    return REQUEST.getRequestURI();
+  }
 
-	public String get(String key) {
-		return REQUEST.getHeader(key);
-	}
+  public String get(String key) {
+    return REQUEST.getHeader(key);
+  }
 
-	public Map<String, String> getCookies() {
-		return cookies;
-	}
+  public Map<String, String> getCookies() {
+    return cookies;
+  }
 }
