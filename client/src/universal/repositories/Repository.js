@@ -4,8 +4,7 @@ export default class Repository {
   constructor(options) {
     this.protocol = config.server.current ? 'http:': '';
     this.port = config.api.port ? ':' + config.api.port : '';
-    //this.apiServer = config.server.current ? `${this.protocol}//${config.api.host}${this.port}` : '';
-    this.apiServer = `http://localhost:8080`;
+    this.apiServer = config.server.current ? `${this.protocol}//${config.api.host}${this.port}` : '';
     this.client = options.client;
   }
 

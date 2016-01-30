@@ -85,7 +85,8 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
         HOST: JSON.stringify(process.env.HOST),
         GA_TRACKING_ID: JSON.stringify(process.env.GA_TRACKING_ID),
-        PORT: process.env.PORT
+        PORT: process.env.PORT,
+        CLIENT: process.env.CLIENT
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

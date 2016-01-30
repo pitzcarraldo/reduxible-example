@@ -5,27 +5,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.script.ScriptException;
+import java.util.concurrent.*;
 
 /**
  * @author Alan(Minkyu Cho)
  */
 @Slf4j
 @Component
-//@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class JavaScriptRunner {
-	@Autowired
-	public NashornScriptEngine nashornScriptEngine;
+  private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
+  private static final int DEFAULT_TIMEOUT = 3;
 
-	public Object run(String method, Object... args) {
-		try {
-			return nashornScriptEngine.invokeFunction(method, args);
-		} catch (ScriptException e) {
-			log.error(e.getMessage(), e);
-		} catch (NoSuchMethodException e) {
-			log.error(e.getMessage(), e);
-		}
-		return null;
-	}
+  @Autowired
+  public NashornScriptEngine nashornScriptEngine;
+
+  public Object run(String method, Object... args) throws Exception {
+      return EXECUTOR.submit(() -> nashornScriptEngine.invokeFunction(method, args)).get(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+  }
 
 }

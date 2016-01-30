@@ -1,74 +1,77 @@
 buildscript {
-    ext {
-        springBootVersion = '1.3.2.RELEASE'
-        springLoadedVersion = '1.2.5.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url "https://plugins.gradle.org/m2" }
-    }
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath "org.springframework:springloaded:${springLoadedVersion}"
-        classpath "com.moowork.gradle:gradle-node-plugin:0.11"
-    }
+  ext {
+    springBootVersion = '1.3.2.RELEASE'
+    springLoadedVersion = '1.2.5.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://plugins.gradle.org/m2" }
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    classpath "org.springframework:springloaded:${springLoadedVersion}"
+    classpath "com.moowork.gradle:gradle-node-plugin:0.11"
+  }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
 apply plugin: 'war'
 apply plugin: 'com.moowork.node'
 
 
 war {
-    baseName = 'reduxible-spring-example'
-    version = '0.0.2-beta'
+  baseName = 'reduxible-spring-universal-example'
+  version = '0.0.2-beta'
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    mavenCentral()
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
+  mavenCentral()
+  maven { url "https://repo.spring.io/snapshot" }
+  maven { url "https://repo.spring.io/milestone" }
 }
 
 configurations {
-    providedRuntime
+  providedRuntime
 }
 
 dependencies {
-    compile('org.projectlombok:lombok')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('com.ning:async-http-client:1.9.31')
-    compile('org.springframework.boot:spring-boot-starter-tomcat')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.easytesting:fest-assert-core:2.0M10')
+  compile('org.projectlombok:lombok')
+  compile('org.springframework.boot:spring-boot-starter-web')
+  compile('org.apache.httpcomponents:httpclient:4.5.1')
+  compile('org.apache.httpcomponents:httpasyncclient:4.1.1')
+  compile('org.apache.httpcomponents:httpcore-nio:4.4.4')
+  compile('com.google.code.gson:gson:2.5')
+  compile('org.springframework.boot:spring-boot-starter-tomcat')
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+  testCompile('org.easytesting:fest-assert-core:2.0M10')
 }
 
 dependencyManagement {
-	imports { 
-		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Brixton.M2" 
-	}
+  imports {
+    mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Brixton.M2"
+  }
 }
 
 idea {
-    module {
-        inheritOutputDirs = false
-        outputDir = file("$buildDir/classes/main/")
-    }
+  module {
+    inheritOutputDirs = false
+    outputDir = file("$buildDir/classes/main/")
+  }
 }
 
 eclipse {
-    classpath {
-         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-    }
+  classpath {
+    containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+    containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+  }
 }
 
 node {
@@ -81,9 +84,9 @@ node {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.7'
+  gradleVersion = '2.7'
 }
 
 task stage {
-    dependsOn build
+  dependsOn build
 }

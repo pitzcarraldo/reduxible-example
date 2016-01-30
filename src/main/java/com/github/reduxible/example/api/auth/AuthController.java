@@ -18,18 +18,18 @@ public class AuthController {
 	private AuthService authService;
 
 	@RequestMapping(path = "/user", method = RequestMethod.POST)
-	public String getUser(@RequestBody Map<String, String> auth) {
-		return authService.getUser(auth);
+	public User getUser(@RequestBody Map<String, String> auth) {
+    return new User(authService.getUser(auth), "");
 	}
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String login(@RequestBody Map<String, String> username) {
-		return authService.getAuth(username);
+	public User login(@RequestBody Map<String, String> username) {
+		return new User("", authService.getAuth(username));
 	}
 
 	@RequestMapping(path = "/logout", method = RequestMethod.POST)
-	public String logout(@RequestBody Map<String, String> auth) {
-		return authService.getUser(auth);
+	public User logout(@RequestBody Map<String, String> auth) {
+		return new User(authService.getUser(auth), "");
 	}
 
 }

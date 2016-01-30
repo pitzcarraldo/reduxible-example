@@ -17,7 +17,7 @@ export default class Application extends Reduxible {
       middlewares,
       reducers,
       reloader: Application.reloader,
-      //initialActions,
+      initialActions,
       extras: config.extras
     });
   }

@@ -6,7 +6,7 @@ export const action = createAction({
     return {
       thunk: async(dispatch, getState, helpers) => {
         const {http} = helpers;
-        const {data: {content}} = await HomeRepository(http).findAll();
+        const {data: content} = await HomeRepository(http).findAll();
         return dispatch(action('SET_CONTENT')(content));
       }
     };

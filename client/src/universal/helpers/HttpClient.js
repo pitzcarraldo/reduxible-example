@@ -9,7 +9,7 @@ export default class HttpClient {
 
           request.url = url;
           request.method = method;
-          request.timeout = 1000;
+          request.timeout = 3000;
 
           if (options && options.headers) {
             request.headers = {...options.headers};

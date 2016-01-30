@@ -9,7 +9,7 @@ export const action = createAction({
         const { http, cookie } = helpers;
         const auth = cookie.get('auth');
         if (auth) {
-          const { data : username } = await AuthRepository(http).findUserByAuth(auth);
+          const { data : { username } } = await AuthRepository(http).findUserByAuth(auth);
           return dispatch(action('UPDATE_USER')({username, auth}));
         } else {
           return dispatch(action('REMOVE_USER')());
@@ -22,7 +22,7 @@ export const action = createAction({
       thunk: async (dispatch, getState, helpers) => {
         try {
           const { http, cookie } = helpers;
-          const { data : auth } = await AuthRepository(http).login(username);
+          const { data : { auth } } = await AuthRepository(http).login(username);
           const user = {
             username,
             auth
@@ -41,7 +41,7 @@ export const action = createAction({
         try {
           const { http, cookie } = helpers;
           const auth = cookie.get('auth');
-          const { data : username } = await AuthRepository(http).logout(auth);
+          const { data : { username } } = await AuthRepository(http).logout(auth);
           if (username) {
             cookie.remove('auth');
             return dispatch(action('REMOVE_USER')());

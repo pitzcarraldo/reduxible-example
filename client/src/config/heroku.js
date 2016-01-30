@@ -8,7 +8,7 @@ export default {
     port: process.env.PORT || 8080
   },
   api: {
-    host: process.env.HOST || 'reduxible.herokuapp.com',
+    host: process.env.HOST || 'reduxible-spring-universal.herokuapp.com',
     port: ''
   },
   ga: {

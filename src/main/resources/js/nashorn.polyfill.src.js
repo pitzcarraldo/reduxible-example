@@ -2,27 +2,27 @@
  * @origin https://gist.github.com/bripkens/8597903
  * @modifier Minkyu Cho(mrnoname@naver)
  */
-((context) => {
+(function (context) {
   const Timer = Java.type('java.util.Timer');
   const Phaser = Java.type('java.util.concurrent.Phaser');
   const TimeUnit = Java.type('java.util.concurrent.TimeUnit');
   const System = Java.type('java.lang.System');
-  const RestTemplate = Java.type('org.springframework.web.client.RestTemplate');
-  const AsyncRestTemplate = Java.type('org.springframework.web.client.AsyncRestTemplate');
+  const HttpClients = Java.type('com.github.reduxible.example.script.HttpClients');
   const HttpHeaders = Java.type('org.springframework.http.HttpHeaders');
   const HttpEntity = Java.type('org.springframework.http.HttpEntity');
   const HttpMethod = Java.type('org.springframework.http.HttpMethod');
-  const HttpRequestFactory = Java.type('org.springframework.http.client.HttpComponentsClientHttpRequestFactory');
   const ListenableFutureCallback = Java.type('org.springframework.util.concurrent.ListenableFutureCallback');
-  const JavaObject = Java.type('java.lang.Object');
+  const parse = (object) => JSON.parse(HttpClients.toJson(object));
 
   context.window = context;
   context.window.document = {};
   context.window.document.coookie = '';
-  context.console.log = print;
-  context.console.warn = print;
-  context.console.error = print;
-  context.console.debug = print;
+  context.console = {
+    log: print,
+    warn: print,
+    error: print,
+    debug: print
+  };
 
   const timer = new Timer('jsEventLoop', false);
   let phaser = new Phaser();
@@ -95,6 +95,7 @@
     timer.cancel();
     phaser.forceTermination();
   };
+
   context.XMLHttpRequest = class XMLHttpRequest {
     constructor() {
       this.method = {};
@@ -115,17 +116,28 @@
     }
 
     abort() {
+      throw new Error('Request aborted.');
     }
 
     ontimeout() {
       throw new Error('Request timed out.');
     }
 
+    onload() {
+    }
+
+    onerror() {
+    }
+
     onreadystatechange() {
     }
 
     getAllResponseHeaders() {
-      return JSON.stringify(this.responseHeaders);
+      let headers = '';
+      Object.keys(this.responseHeaders).forEach((key) => {
+        headers += `${key}: ${this.responseHeaders[key]}\n`;
+      });
+      return headers;
     }
 
     getResponseHeader(key) {
@@ -147,52 +159,55 @@
     };
 
     send(data) {
-      const requestFactory = new HttpRequestFactory();
-      if (this.timeout) {
-        requestFactory.setReadTimeout(this.timeout);
-        requestFactory.setConnectionTimeout(this.timeout);
-      }
-      const client = this.async ? new AsyncRestTemplate(requestFactory) : new RestTemplate(requestFactory);
+      phaser.register();
+      const client = this.async ? HttpClients.getAsync(this.timeout) : HttpClients.getSync(this.timeout);
       const method = HttpMethod.valueOf(this.method);
       const header = new HttpHeaders();
 
       Object.keys(this.headers)
         .forEach((name) => {
           const value = this.headers[name];
-          header.put(name, value);
+          header.set(name, value);
         });
       const entity = new HttpEntity(data, header);
 
       this.readyState = 2;
       setTimeout(this.onreadystatechange, 0);
-      const response = client.exchange(this.url, method, entity, JavaObject.class);
-      if (this.async) {
-        response.addCallback(new ListenableFutureCallback({
-          onFailure: (error) => {
-            throw new Error(error);
-          },
-          onSuccess: (res) => {
-            this.readyState = 4;
-            this.responseText = JSON.stringify(response.getBody());
-            this.responseHeaders = response.getHeaders();
-            this.response = response.getBody();
-            this.status = response.getStatusCode().value;
-            this.statusText = response.getStatusCode().toString();
-            context.setTimeout(this.onreadystatechange, 0);
-            phaser.arriveAndDeregister();
-          }
-        }));
-      } else {
-        this.readyState = 4;
-        this.responseText = JSON.stringify(response.getBody());
-        this.responseHeaders = response.getHeaders();
-        this.response = response.getBody();
-        this.status = response.getStatusCode().value;
-        this.statusText = response.getStatusCode().toString();
-        context.setTimeout(this.onreadystatechange, 0);
-        phaser.arriveAndDeregister();
+
+      const response = client.exchange(this.url, method, entity, java.lang.Object.class);
+
+      this.readyState = 3;
+      setTimeout(this.onreadystatechange, 0);
+
+      if (!this.async) {
+        return this.setResponse(response);
       }
+
+      return response.addCallback(new ListenableFutureCallback({
+        onFailure: (error) => {
+          console.log(JSON.stringify(parse(error)));
+          if (this.onerror) {
+            return this.onerror()
+          }
+          onTaskFinished();
+          throw new Error(parse(error));
+        },
+        onSuccess: (res) => {
+          this.setResponse(res);
+        }
+      }));
+    }
+
+    setResponse(res) {
+      this.response = parse(res.body);
+      this.responseText = JSON.stringify(this.response);
+      this.responseHeaders = parse(res.getHeaders());
+      this.status = res.statusCode.value();
+      this.statusText = res.statusCode.value() + ' ' + res.statusCode.getReasonPhrase();
+      this.readyState = 4;
+      context.setTimeout(this.onreadystatechange, 0);
+      context.setTimeout(this.onload, 0);
+      onTaskFinished();
     }
   }
-})
-(this);
+})(context);

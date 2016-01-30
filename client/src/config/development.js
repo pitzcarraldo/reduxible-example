@@ -4,12 +4,12 @@ export default {
   devTools: true,
   client: {
     host: 'localhost',
-    port: 8080
+    port: 3000
   },
   server: {
     current: !(process.env.CLIENT || false),
     host: 'localhost',
-    port: 3000
+    port: 8080
   },
   api: {
     host: 'localhost',

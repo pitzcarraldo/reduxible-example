@@ -3,6 +3,8 @@ var $j = path.join;
 var context = path.resolve(__dirname, '..', '..');
 var base = require('./prod.base.config');
 
+process.env.CLIENT = true;
+
 module.exports = Object.assign({
   entry: {
     polyfills: $j(context, 'client', 'src', 'commons', 'polyfills.js'),
@@ -13,7 +15,7 @@ module.exports = Object.assign({
   },
   output: {
     path: $j(context, 'src', 'main', 'resources', 'static', 'dist'),
-    filename: '[name]-[chunkhash].js',
+    filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
   }
