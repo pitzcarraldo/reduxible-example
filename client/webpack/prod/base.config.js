@@ -1,11 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 var strip = require('strip-loader');
-var isomorphic = require('./isomorphic').plugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var isomorphic = require('../isomorphic').plugin;
 var $q = require('webpack-querify');
 var $j = path.join;
-var context = path.resolve(__dirname, '..', '..');
+var context = path.resolve(__dirname, '..', '..', '..');
 
 module.exports = {
   devtool: 'source-map',
@@ -88,11 +88,6 @@ module.exports = {
         PORT: process.env.PORT,
         CLIENT: process.env.CLIENT
       }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      mangle: false,
-      minimize: false
     }),
     isomorphic
   ]

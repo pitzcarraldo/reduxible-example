@@ -1,8 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
 var $j = path.join;
-var context = path.resolve(__dirname, '..', '..');
-var base = require('./dev.base.config');
+var context = path.resolve(__dirname, '..', '..', '..');
+var base = require('./base.config');
+
+process.env.CLIENT = false;
 
 var config = Object.assign({
   entry: {
@@ -18,10 +20,11 @@ var config = Object.assign({
   }
 }, base);
 
-config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-  sourceMap: true,
-  mangle: false,
-  minimize: false
-}));
+// config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+//   output: {comments: false}
+//   sourceMap: false,
+//   minimize: false,
+//   mangle: false
+// }));
 
 module.exports = config;

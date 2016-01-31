@@ -1,9 +1,11 @@
 var path = require('path');
 var $j = path.join;
-var context = path.resolve(__dirname, '..', '..');
-var base = require('./prod.base.config');
+var context = path.resolve(__dirname, '..', '..', '..');
+var base = require('./base.config');
 
-module.exports = Object.assign({
+process.env.CLIENT = false;
+
+var config = Object.assign({
   entry: {
     server: $j(context, 'client', 'src', 'server', 'server.js')
   },
@@ -16,3 +18,5 @@ module.exports = Object.assign({
     publicPath: '/dist/'
   }
 }, base);
+
+module.exports = config;

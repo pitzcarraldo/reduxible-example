@@ -1,10 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-var isomorphic = require('./isomorphic').plugin;
+var isomorphic = require('../isomorphic').plugin;
+var babelConfig = require('../babel.config.js');
 var $q = require('webpack-querify');
-var babelConfig = require('./babel.config.js');
-var context = path.resolve(__dirname, '..', '..');
 var $j = path.join;
+var context = path.resolve(__dirname, '..', '..', '..');
 
 module.exports = {
   devtool: 'inline-source-map',

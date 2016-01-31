@@ -14,7 +14,7 @@ import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @author Alan(Minkyu Cho)
+ * @author Minkyu Cho(mrnoname@naver.com)
  */
 @Component
 public class HttpClients {

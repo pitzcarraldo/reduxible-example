@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Alan(Minkyu Cho)
+ * @author Minkyu Cho(mrnoname@naver.com)
  */
 @Getter
 @Setter

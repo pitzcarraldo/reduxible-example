@@ -14,22 +14,22 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-	@Autowired
-	private AuthService authService;
+  @Autowired
+  private AuthService authService;
 
-	@RequestMapping(path = "/user", method = RequestMethod.POST)
-	public User getUser(@RequestBody Map<String, String> auth) {
+  @RequestMapping(path = "/user", method = RequestMethod.POST)
+  public User getUser(@RequestBody Map<String, String> auth) {
     return new User(authService.getUser(auth), "");
-	}
+  }
 
-	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public User login(@RequestBody Map<String, String> username) {
-		return new User("", authService.getAuth(username));
-	}
+  @RequestMapping(path = "/login", method = RequestMethod.POST)
+  public User login(@RequestBody Map<String, String> username) {
+    return new User("", authService.getAuth(username));
+  }
 
-	@RequestMapping(path = "/logout", method = RequestMethod.POST)
-	public User logout(@RequestBody Map<String, String> auth) {
-		return new User(authService.getUser(auth), "");
-	}
+  @RequestMapping(path = "/logout", method = RequestMethod.POST)
+  public User logout(@RequestBody Map<String, String> auth) {
+    return new User(authService.getUser(auth), "");
+  }
 
 }

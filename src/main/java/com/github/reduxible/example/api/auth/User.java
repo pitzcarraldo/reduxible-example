@@ -13,6 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-	private String username;
-	private String auth;
+  private String username;
+  private String auth;
 }

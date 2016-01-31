@@ -4,7 +4,7 @@ import url from 'url';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from './dev.config';
+import webpackConfig from './dev/client.config';
 import config from '../src/config/index';
 
 const compiler = webpack(webpackConfig);

@@ -13,6 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HomeContent {
-	private String title;
-	private String description;
+  private String title;
+  private String description;
 }
