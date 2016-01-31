@@ -12,7 +12,7 @@ This is the universal app example that built by the [Reduxible](https://github.c
 * Simple Counter.
 * **Even can be run in the Internet Explorer 8!**
 
-## :waring: CAUTION - EXPERIMENTAL
+## :warning: CAUTION - EXPERIMENTAL
 
 Serverside rendering was implemented by Nashorn. But it is not stable because of several reasons.  
 Nashorn is a just EcmaScript Engine. Not a browser emulator. So it can only execute basic JavaScript statements, but doesn't have default functions like setTimeout, setInterval, XMLHttpRequest. So I've added [polyfills](src/main/resources/js/nashorn.polyfill.src.js) for support it based on this [gist](https://gist.github.com/bripkens/8597903). It works in this example, but it can be failed in some not expected cases.  
@@ -29,7 +29,7 @@ or
 npm run prod
 open http://localhost:8080
 
-If doesn't work, do ./gradlew clean and try again.
+#If doesn't work, do './gradlew clean' and try again.
 ```
 
 ## Running Example on the Heroku
