@@ -12,6 +12,8 @@ const app = new Application({
 });
 
 export default function render(req, res) {
+  var wrapper = { res };
   app.server()(req, res);
+  while (!wrapper.res.body) {};
   return res;
 };

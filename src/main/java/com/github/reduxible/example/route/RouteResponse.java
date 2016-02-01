@@ -14,9 +14,9 @@ import java.util.concurrent.Callable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RouteResponse implements Callable<RouteResponse> {
+public class RouteResponse {
   private Integer status = 200;
-  private volatile String body;
+  private String body;
 
   public RouteResponse status(Integer status) {
     this.status = status;
@@ -30,12 +30,5 @@ public class RouteResponse implements Callable<RouteResponse> {
 
   public RouteResponse end(String body) {
     return send(body);
-  }
-
-  @Override
-  public RouteResponse call() {
-    while (this.body == null) {
-    }
-    return this;
   }
 }

@@ -3,10 +3,13 @@ package com.github.reduxible.example.route;
 import com.github.reduxible.example.script.JavaScriptRunner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * @author Minkyu Cho(mrnoname@naver.com)
@@ -15,25 +18,18 @@ import java.util.concurrent.*;
 @Service
 public class RouteService {
   private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
-  private static final int DEFAULT_TIMEOUT = 500;
+
   @Autowired
   private JavaScriptRunner runner;
 
-  public RouteResponse getRouteResult(RouteRequest req) {
+  @Async
+  public Future<RouteResponse> getRouteResult(RouteRequest req) {
     try {
-      RouteResponse res = (RouteResponse) runner.run("render", req, new RouteResponse());
-      if (StringUtils.isEmpty(res.getBody())) {
-        FutureTask<RouteResponse> task = new FutureTask<>(res);
-        EXECUTOR.submit(task);
-        res = task.get(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
-      }
-      return res;
-    } catch (TimeoutException e) {
-      log.error("Rendering Timed Out. Render Single Page Application.");
-      return new RouteResponse(200, "");
+      Future result = EXECUTOR.submit(() -> (RouteResponse) runner.run("render", req, new RouteResponse()));
+      return new AsyncResult<>((RouteResponse) result.get());
     } catch (Exception e) {
       log.error(e.getMessage(), e);
-      return new RouteResponse(500, "");
+      return new AsyncResult<>(new RouteResponse(500, ""));
     }
   }
 }

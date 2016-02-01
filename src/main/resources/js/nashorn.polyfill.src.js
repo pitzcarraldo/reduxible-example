@@ -12,7 +12,7 @@
   const HttpEntity = Java.type('org.springframework.http.HttpEntity');
   const HttpMethod = Java.type('org.springframework.http.HttpMethod');
   const ListenableFutureCallback = Java.type('org.springframework.util.concurrent.ListenableFutureCallback');
-  const parse = (object) => JSON.parse(HttpClients.toJson(object));
+  context.parse = (object) => JSON.parse(HttpClients.toJson(object));
 
   context.window = context;
   context.window.document = {};

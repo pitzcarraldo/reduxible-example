@@ -15,9 +15,11 @@ This is the universal app example that built by the [Reduxible](https://github.c
 ## :warning: CAUTION - EXPERIMENTAL
 
 Serverside rendering was implemented by Nashorn. But it is not stable because of several reasons.  
-Nashorn is a just EcmaScript Engine. Not a browser emulator. So it can only execute basic JavaScript statements, but doesn't have default functions like setTimeout, setInterval, XMLHttpRequest. So I've added [polyfills](src/main/resources/js/nashorn.polyfill.src.js) for support it based on this [gist](https://gist.github.com/bripkens/8597903). It works in this example, but it can be failed in some not expected cases.  
-And Nashorn needs a warm up time. So your first few requests will be failed or slow.  
-This example is the experimental study. Thus, not suitable for making the product.
+
+* Nashorn is a just EcmaScript Engine. Not a browser emulator. So it can only execute basic JavaScript statements, but doesn't have default functions like setTimeout, setInterval, XMLHttpRequest. So I've added [polyfills](src/main/resources/js/nashorn.polyfill.src.js) for support it based on this [gist](https://gist.github.com/bripkens/8597903). It works in this example, but it can be failed in some not expected cases.  
+* And Nashorn needs a warm up time. So your first few requests will be failed or slow. Therefore, I've added a fail over logic to controller. When rendering timed out, this will render empty view that rendering single page application.
+
+**This example is the experimental study. Thus, not suitable for making the product.**
 
 ## How to run this
 
