@@ -14,7 +14,8 @@ This is the example of the Reduxible. It contains counter and todo list sample t
 ## Other Examples
  
 * [Single Page Application Example.](https://github.com/Pitzcarraldo/reduxible-example/tree/spa)
-* [Reduxible + Spring Boot Example.](https://github.com/Pitzcarraldo/reduxible-example/tree/spring)
+* [Reduxible + Spring Boot SPA Example.](https://github.com/Pitzcarraldo/reduxible-example/tree/spring)
+* [Reduxible + Spring Boot Universal Example.](https://github.com/Pitzcarraldo/reduxible-example/tree/spring-universal)
 
 ## How to run this
 
@@ -30,4 +31,5 @@ open http://localhost:8080
 
 * [Reduxible Universal Application Example](http://reduxible.herokuapp.com/)
 * [Reduxible Single Page Application Example](http://reduxible-spa.herokuapp.com/)
-* [Reduxible + Spring Boot Example](http://reduxible-spring.herokuapp.com/)
+* [Reduxible + Spring Boot SPA Example](http://reduxible-spring.herokuapp.com/)
+* [Reduxible + Spring Boot Universal Example(Experimental)](http://reduxible-spring-universal.herokuapp.com/)
