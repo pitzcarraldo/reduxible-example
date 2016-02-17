@@ -31,6 +31,7 @@ export default class Error extends Component {
       <body>
       <Header />
       <div>{error.stack}</div>
+      <div id="content"></div>
       <Footer />
       {assets.javascript.app && <script src={assets.javascript.app} charSet="UTF-8"></script>}
       </body>

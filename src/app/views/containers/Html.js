@@ -19,7 +19,7 @@ export default class Html extends Component {
 
   render() {
     const { component, store, isomorphic } = this.props;
-    const state = store && store.getState() || {};
+    const state = store && store.getState && store.getState() || {};
     const assets = isomorphic.assets();
     const content = component ? ReactDOM.renderToString(component) : '';
     return (

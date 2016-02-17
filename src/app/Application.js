@@ -1,10 +1,10 @@
 import Reduxible from 'reduxible';
 import Html from './views/containers/Html';
 import Error from './views/containers/Error/Error';
-import routes from './routes/index';
+import routes from './routes';
 import middlewares from './middlewares/index';
-import reducers from './services/reducers';
 import initialActions from './services/initialActions';
+import reducers from './services/reducers';
 
 export default class Application extends Reduxible {
   constructor(config) {
@@ -15,18 +15,18 @@ export default class Application extends Reduxible {
       devTools: config.development ? require('./views/components/DevTools/DevTools') : '',
       routes,
       middlewares,
-      reducers,
-      reloader: Application.reloader,
       initialActions,
+      reducers,
+      reloader,
       extras: config.extras
     });
   }
+}
 
-  static reloader(store) {
-    if (module.hot) {
-      module.hot.accept('./services/reducers', () => {
-        store.replaceReducer(require('./services/reducers'));
-      });
-    }
+function reloader(store) {
+  if (module.hot) {
+    module.hot.accept('./services/reducers', () => {
+      store.replaceReducer(require('./services/reducers'));
+    });
   }
 }
