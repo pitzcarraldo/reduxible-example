@@ -10,13 +10,13 @@ import { pushPath } from 'redux-simple-router';
   {
     loadAuth: action('LOAD_AUTH'),
     login: action('LOGIN'),
-    pushPath
+    push: pushPath
   }
 )
 export default class Login extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
-    pushPath: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired
   };
 
   state = {
@@ -32,10 +32,9 @@ export default class Login extends Component {
   }
 
   handleAuth(props) {
-    /* eslint-disable no-shadow */
-    const { user, pushPath } = props;
+    const { user, push } = props;
     if (user) {
-      pushPath(`/profile`);
+      push(`/profile`);
     }
   }
 
