@@ -1,7 +1,6 @@
 import { createReducer, createAction } from 'reduxible';
 import AuthRepository from '../repositories/AuthRepository';
 
-
 export const action = createAction({
   LOAD_AUTH: () => {
     return {
@@ -9,11 +8,11 @@ export const action = createAction({
         const { http, cookie } = helpers;
         const auth = cookie.get('auth');
         if (auth) {
+          /* eslint-disable new-cap */
           const username = await (await AuthRepository(http).findUserByAuth(auth)).text();
-          return dispatch(action('UPDATE_USER')({username, auth}));
-        } else {
-          return dispatch(action('REMOVE_USER')());
+          return dispatch(action('UPDATE_USER')({ username, auth }));
         }
+        return dispatch(action('REMOVE_USER')());
       }
     };
   },

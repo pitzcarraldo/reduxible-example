@@ -5,7 +5,8 @@ export const action = createAction({
   GET_TODO: () => {
     return {
       thunk: async (dispatch, getState, helpers) => {
-        const { http }  = helpers;
+        const { http } = helpers;
+        /* eslint-disable new-cap */
         const todos = await (await TodoRepository(http).findAll()).json();
         return dispatch(action('UPDATE_TODOS')(todos));
       }
@@ -21,7 +22,7 @@ export const action = createAction({
           text,
           complete: false
         };
-        const { http }  = helpers;
+        const { http } = helpers;
         const todos = await (await TodoRepository(http).save(todo)).json();
         return dispatch(action('UPDATE_TODOS')(todos));
       }
@@ -32,8 +33,8 @@ export const action = createAction({
       thunk: async (dispatch, getState, helpers) => {
         const todo = {};
         const currentTodo = getState().todo.todos[id];
-        todo[id] = {complete: !currentTodo.complete};
-        const { http }  = helpers;
+        todo[id] = { complete: !currentTodo.complete };
+        const { http } = helpers;
         const todos = await (await TodoRepository(http).save(todo)).json();
         return dispatch(action('UPDATE_TODOS')(todos));
       }

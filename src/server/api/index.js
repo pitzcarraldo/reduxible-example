@@ -6,6 +6,7 @@ import auth from './auth';
 import home from './home';
 import todos from './todos';
 
+/* eslint-disable new-cap */
 const api = Express.Router();
 
 api.use(bodyParser.urlencoded({ extended: true }));

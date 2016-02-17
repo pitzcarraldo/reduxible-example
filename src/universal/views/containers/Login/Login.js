@@ -31,7 +31,7 @@ export default class Login extends Component {
   }
 
   handleAuth(props) {
-    const { user, pushPath } = props;
+    const { user } = props;
     if (user) {
       pushPath(`/profile`);
     }
