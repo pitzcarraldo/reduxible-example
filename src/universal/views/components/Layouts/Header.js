@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { GithubButton } from '../../components/index';
 
 export default class Header extends Component {
   render() {

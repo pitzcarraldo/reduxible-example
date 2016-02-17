@@ -10,9 +10,11 @@ export const action = createAction({
         if (auth) {
           /* eslint-disable new-cap */
           const username = await (await AuthRepository(http).findUserByAuth(auth)).text();
-          return dispatch(action('UPDATE_USER')({ username, auth }));
+          dispatch(action('UPDATE_USER')({ username, auth }));
+        } else {
+          dispatch(action('REMOVE_USER')());
         }
-        return dispatch(action('REMOVE_USER')());
+        return;
       }
     };
   },

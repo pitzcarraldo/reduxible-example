@@ -6,6 +6,7 @@ export const action = createAction({
     return {
       thunk: async (dispatch, getState, helpers) => {
         const { http } = helpers;
+        /* eslint-disable new-cap */
         const content = await (await HomeRepository(http).findAll()).json();
         return dispatch(action('SET_CONTENT')(content));
       }

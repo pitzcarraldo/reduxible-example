@@ -20,6 +20,7 @@ export default class TodoList extends Component {
     todos: PropTypes.object,
     user: PropTypes.object,
     addTodo: PropTypes.func.isRequired,
+    getTodo: PropTypes.func.isRequired,
     toggleTodo: PropTypes.func.isRequired,
     removeTodo: PropTypes.func.isRequired
   };
@@ -37,11 +38,11 @@ export default class TodoList extends Component {
     this.setState({ todo: '' });
   };
 
-  toggleTodo = ({ target : { dataset: { id } } }) => {
+  toggleTodo = ({ target: { dataset: { id } } }) => {
     this.props.toggleTodo(id);
   };
 
-  removeTodo = ({ target : { dataset: { id } } }) => {
+  removeTodo = ({ target: { dataset: { id } } }) => {
     this.props.removeTodo(id);
   };
 

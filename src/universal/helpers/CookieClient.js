@@ -5,6 +5,7 @@ export default class CookieClient {
     if (req) {
       return new CookieDough(req);
     }
+    /* eslint-disable new-cap */
     return CookieDough();
   }
 }
