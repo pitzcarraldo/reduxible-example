@@ -11,8 +11,8 @@ if (config.server.current) {
   ga.initialize(config.ga.id);
   reducer = createReducer({}, [
     {
-      types: [UPDATE_PATH],
-      reduce: ({ payload : { path } }, state) => {
+      types: [ UPDATE_PATH ],
+      reduce: ({ payload: { path } }, state) => {
         ga.pageview(path);
         return state;
       }

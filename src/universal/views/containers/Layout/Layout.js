@@ -17,7 +17,9 @@ import { action as authAction } from '../../../services/authService';
 )
 export default class Layout extends Component {
   static propTypes = {
+    children: PropTypes.object,
     menuOpen: PropTypes.bool,
+    loadAuth: PropTypes.func,
     toggleMenu: PropTypes.func
   };
 
@@ -26,8 +28,8 @@ export default class Layout extends Component {
     loadAuth();
   }
 
-  toggleMenu = (e) => {
-    e.preventDefault();
+  toggleMenu = (event) => {
+    event.preventDefault();
     this.props.toggleMenu(!this.props.menuOpen);
   };
 
