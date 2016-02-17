@@ -4,8 +4,8 @@ import serveFavicon from 'serve-favicon';
 import serveStatic from 'serve-static';
 import compression from 'compression';
 import path from 'path';
-import config from '../config/index';
-import Application from '../app/index';
+import config from './config/index';
+import { Application } from './app/index';
 import api from './api/index';
 export default function(isomorphic) {
   const app = new Application({
@@ -18,8 +18,8 @@ export default function(isomorphic) {
   const server = new Express();
 
   server.use(compression());
-  server.use(serveFavicon(path.join(__dirname, '..', '..', 'static', 'favicon.ico')));
-  server.use(serveStatic(path.join(__dirname, '..', '..', 'static')));
+  server.use(serveFavicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+  server.use(serveStatic(path.join(__dirname, '..', 'static')));
   server.use(cookieParser());
   server.use('/api', api);
   server.use(app.server());

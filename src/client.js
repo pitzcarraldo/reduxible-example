@@ -1,6 +1,6 @@
 import 'babel-core/polyfill';
-import Application from '../app/index';
-import config from '../config/index';
+import { Application } from './app/index';
+import config from './config/index';
 
 const app = new Application({
   development: config.development,

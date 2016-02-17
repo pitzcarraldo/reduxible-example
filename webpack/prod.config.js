@@ -12,7 +12,7 @@ module.exports = {
     polyfills: './src/commons/polyfills.js',
     app: [
       './src/commons/commons.js',
-      './src/client/client.js'
+      './src/client.js'
     ]
   },
   output: {
@@ -34,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)/,
-        exclude: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        exclude: path.join(__dirname, '..', 'src', 'app', 'views'),
         loader: ExtractTextPlugin.extract(
           'style',
           $q({
@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)/,
-        include: path.join(__dirname, '..', 'src', 'universal', 'views'),
+        include: path.join(__dirname, '..', 'src', 'app', 'views'),
         loader: ExtractTextPlugin.extract(
           'style',
           $q({
