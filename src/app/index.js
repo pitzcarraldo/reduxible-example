@@ -9,10 +9,10 @@ import initialActions from './services/initialActions';
 export default class Application extends Reduxible {
   constructor(config) {
     super({
-      config,
+      ...config,
       container: Html,
       errorContainer: Error,
-      devTools: config.devTools ? require('./helpers/DevTools') : '',
+      devTools: config.development ? require('./views/components/DevTools/DevTools') : '',
       routes,
       middlewares,
       reducers,

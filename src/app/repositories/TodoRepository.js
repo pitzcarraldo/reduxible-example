@@ -1,5 +1,6 @@
 import Repository from './Repository';
-class TodoRepository extends Repository {
+
+export default class TodoRepository extends Repository {
   constructor(options) {
     super(options);
     this.namespace = 'todos';
@@ -19,4 +20,3 @@ class TodoRepository extends Repository {
     return this.client.delete(this.api() + `/${id}`);
   }
 }
-export default Repository.getInstance(TodoRepository);

@@ -1,6 +1,6 @@
 import Repository from './Repository';
 
-class AuthRepository extends Repository {
+export default class AuthRepository extends Repository {
   constructor(options) {
     super(options);
     this.namespace = 'auth';
@@ -18,4 +18,3 @@ class AuthRepository extends Repository {
     return this.client.post(this.api() + '/logout', { data: { auth } });
   }
 }
-export default Repository.getInstance(AuthRepository);

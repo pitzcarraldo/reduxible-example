@@ -1,7 +1,6 @@
 export default {
   development: false,
   universal: true,
-  devTools: false,
   client: {},
   server: {
     current: !(process.env.CLIENT || false),

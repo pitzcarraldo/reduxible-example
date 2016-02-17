@@ -1,14 +1,15 @@
 import config from '../../config/index';
+import HttpProvider from '../providers/HttpProvider';
 
 export default class Repository {
-  constructor(options) {
+  constructor(options = {}) {
     this.protocol = config.server.current ? 'http:' : '';
     this.port = config.api.port ? ':' + config.api.port : '';
     this.apiServer = config.server.current ? `${this.protocol}//${config.api.host}${this.port}` : '';
-    this.client = options.client;
+    this.client = options.client || HttpProvider.CLIENT_INSTANCE;
   }
 
-  withClient(client) {
+  with(client) {
     if (this.client !== client) {
       this.client = client;
     }
@@ -18,12 +19,4 @@ export default class Repository {
   api() {
     return `${this.apiServer}/api/${this.namespace}`;
   }
-
-  /* eslint-disable no-shadow */
-  static getInstance = Repository => client => {
-    if (!Repository.INSTANCE) {
-      Repository.INSTANCE = new Repository({ client });
-    }
-    return Repository.INSTANCE.withClient(client);
-  };
 }

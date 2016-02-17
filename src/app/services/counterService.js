@@ -10,13 +10,7 @@ const initailState = {
 
 export default createReducer(initailState, [
   {
-    types: [ 'INCREMENT' ],
-    reduce: ({ payload }, state) => {
-      const { count } = state;
-      return {
-        ...state,
-        count: count + 1
-      };
-    }
+    types: ['INCREMENT'],
+    reduce: ({ payload }, state) => ({ ...state, count: state.count + 1 })
   }
 ]);

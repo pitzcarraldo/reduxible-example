@@ -1,6 +1,6 @@
 import Repository from './Repository';
 
-class HomeRepository extends Repository {
+export default class HomeRepository extends Repository {
   constructor(options) {
     super(options);
     this.namespace = 'home';
@@ -10,4 +10,3 @@ class HomeRepository extends Repository {
     return this.client.get(this.api());
   }
 }
-export default Repository.getInstance(HomeRepository);

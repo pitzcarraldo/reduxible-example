@@ -5,14 +5,13 @@ import serveStatic from 'serve-static';
 import compression from 'compression';
 import path from 'path';
 import config from '../config/index';
-import Application from '../universal/Application';
+import Application from '../app/index';
 import api from './api/index';
 export default function(isomorphic) {
   const app = new Application({
     server: config.server.current,
     development: config.development,
     universal: config.universal,
-    devTools: config.devTools,
     extras: { isomorphic }
   });
 
