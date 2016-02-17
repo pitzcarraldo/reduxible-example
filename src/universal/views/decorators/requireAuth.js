@@ -24,6 +24,7 @@ export default function requireAuth(ComposedComponent) {
     }
 
     handleAuth(props) {
+      /* eslint-disable no-shadow */
       const { user, pushPath } = props;
       if (!user) {
         pushPath(`/login?next=${this.props.location.pathname}`);

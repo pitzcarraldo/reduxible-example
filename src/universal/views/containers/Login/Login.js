@@ -15,7 +15,8 @@ import { pushPath } from 'redux-simple-router';
 )
 export default class Login extends Component {
   static propTypes = {
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    pushPath: PropTypes.func.isRequired
   };
 
   state = {
@@ -31,7 +32,8 @@ export default class Login extends Component {
   }
 
   handleAuth(props) {
-    const { user } = props;
+    /* eslint-disable no-shadow */
+    const { user, pushPath } = props;
     if (user) {
       pushPath(`/profile`);
     }

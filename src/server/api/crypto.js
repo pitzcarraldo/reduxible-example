@@ -3,7 +3,7 @@ const ALGORITHM = 'aes-256-ctr';
 const PASSWORD = 'd6F3Efeq';
 
 export function encrypt(text) {
-  if(!text) {
+  if (!text) {
     return '';
   }
   const cipher = crypto.createCipher(ALGORITHM, PASSWORD);
@@ -11,7 +11,7 @@ export function encrypt(text) {
 }
 
 export function decrypt(text) {
-  if(!text) {
+  if (!text) {
     return '';
   }
   const decipher = crypto.createDecipher(ALGORITHM, PASSWORD);
