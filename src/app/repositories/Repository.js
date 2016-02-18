@@ -9,7 +9,7 @@ export default class Repository {
     this.client = options.client || HttpProvider.CLIENT_INSTANCE;
   }
 
-  with(client) {
+  withClient(client) {
     if (this.client !== client) {
       this.client = client;
     }

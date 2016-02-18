@@ -1,6 +1,6 @@
 import { createReducer, createAction } from 'reduxible';
 
-export const action = createAction({
+export const action = createAction('COUNTER', {
   INCREMENT: {}
 });
 
@@ -10,7 +10,7 @@ const initailState = {
 
 export default createReducer(initailState, [
   {
-    types: ['INCREMENT'],
+    types: [action.type('INCREMENT')],
     reduce: ({ payload }, state) => ({ ...state, count: state.count + 1 })
   }
 ]);

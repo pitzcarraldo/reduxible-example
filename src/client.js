@@ -8,5 +8,4 @@ const app = new Application({
 });
 
 
-
 app.client(window.__state, document.getElementById('content'));

@@ -6,6 +6,14 @@ import middlewares from './middlewares/index';
 import initialActions from './services/initialActions';
 import reducers from './services/reducers';
 
+function reloader(store) {
+  if (module.hot) {
+    module.hot.accept('./services/reducers', () => {
+      store.replaceReducer(require('./services/reducers'));
+    });
+  }
+}
+
 export default class Application extends Reduxible {
   constructor(config) {
     super({
@@ -19,14 +27,6 @@ export default class Application extends Reduxible {
       reducers,
       reloader,
       extras: config.extras
-    });
-  }
-}
-
-function reloader(store) {
-  if (module.hot) {
-    module.hot.accept('./services/reducers', () => {
-      store.replaceReducer(require('./services/reducers'));
     });
   }
 }

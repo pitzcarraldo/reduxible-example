@@ -1,13 +1,11 @@
 import { createReducer, createAction } from 'reduxible';
-import HomeRepository from '../repositories/HomeRepository';
+import { homeRepository } from '../repositories/HomeRepository';
 
-const homeRepository = new HomeRepository();
-
-export const action = createAction({
+export const action = createAction('HOME', {
   LOAD_CONTENT: () => {
     return {
       thunk: async(dispatch, getState, { $http }) => {
-        const { data: content } = await homeRepository.with($http).findAll();
+        const { data: content } = await homeRepository.withClient($http).findAll();
         return dispatch(action('SET_CONTENT')(content));
       }
     };
@@ -21,7 +19,7 @@ const initialState = {
 
 export default createReducer(initialState, [
   {
-    types: [ 'SET_CONTENT' ],
+    types: [ action.type('SET_CONTENT') ],
     reduce: ({ payload: { content } }, state) => ({ ...state, content })
   }
 ]);

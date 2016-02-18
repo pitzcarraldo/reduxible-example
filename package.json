@@ -1,6 +1,6 @@
 {
   "name": "reduxible-example",
-  "version": "0.1.0-rc0",
+  "version": "0.1.0-rc",
   "description": "Example of The Universal Web Application based on Reduxible.",
   "main": "src/app/index.js",
   "scripts": {
@@ -57,7 +57,7 @@
     "express-http-proxy": "^0.6.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
-    "history": "^1.17.x",
+    "history": "1.17.0",
     "json-loader": "^0.5.4",
     "mocha": "^2.3.4",
     "modernizr": "^3.3.1",
@@ -79,7 +79,7 @@
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.1",
     "redux-simple-router": "^1.0.2",
-    "reduxible": "0.1.0-rc0",
+    "reduxible": "0.1.0-rc1",
     "respond.js": "^1.4.2",
     "rimraf": "^2.4.4",
     "sass-loader": "^3.1.2",

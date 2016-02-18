@@ -1,13 +1,11 @@
 import { createReducer, createAction } from 'reduxible';
-import TodoRepository from '../repositories/TodoRepository';
+import { todoRepository } from '../repositories/TodoRepository';
 
-const todoRepository = new TodoRepository();
-
-export const action = createAction({
+export const action = createAction('TODO', {
   GET_TODO: () => {
     return {
       thunk: async(dispatch, getState, { $http }) => {
-        const { data: todos } = await todoRepository.with($http).findAll();
+        const { data: todos } = await todoRepository.withClient($http).findAll();
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
@@ -22,7 +20,7 @@ export const action = createAction({
           text,
           complete: false
         };
-        const { data: todos } = await todoRepository.with($http).save(todo);
+        const { data: todos } = await todoRepository.withClient($http).save(todo);
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
@@ -33,7 +31,7 @@ export const action = createAction({
         const todo = {};
         const currentTodo = getState().todo.todos[ id ];
         todo[ id ] = { complete: !currentTodo.complete };
-        const { data: todos } = await todoRepository.with($http).save(todo);
+        const { data: todos } = await todoRepository.withClient($http).save(todo);
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
@@ -41,7 +39,7 @@ export const action = createAction({
   REMOVE_TODO: id => {
     return {
       thunk: async(dispatch, getState, { $http }) => {
-        const { data: todos } = await todoRepository.with($http).remove(id);
+        const { data: todos } = await todoRepository.withClient($http).remove(id);
         return dispatch(action('UPDATE_TODOS')(todos));
       }
     };
@@ -56,7 +54,7 @@ const initialState = {
 
 export default createReducer(initialState, [
   {
-    types: [ 'UPDATE_TODOS' ],
+    types: [ action.type('UPDATE_TODOS') ],
     reduce: ({ payload: { todos } }, state) => ({ ...state, todos })
   }
 ]);

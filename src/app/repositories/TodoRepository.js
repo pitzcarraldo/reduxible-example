@@ -20,3 +20,5 @@ export default class TodoRepository extends Repository {
     return this.client.delete(this.api() + `/${id}`);
   }
 }
+
+export const todoRepository = new TodoRepository();

@@ -1,16 +1,14 @@
 import { createReducer, createAction } from 'reduxible';
-import AuthRepository from '../repositories/AuthRepository';
+import { authRepository } from '../repositories/AuthRepository';
 
-const authRepository = new AuthRepository();
-
-export const action = createAction({
+export const action = createAction('AUTH', {
   LOAD_AUTH: () => {
     return {
       thunk: async(dispatch, getState, { $http, $cookies }) => {
         const auth = $cookies.get('auth');
         if (auth) {
-          const { data: username } = await authRepository.with($http).findUserByAuth(auth);
-          return dispatch(action('UPDATE_USER')({ username, auth }));
+          const { data: username } = await authRepository.withClient($http).findUserByAuth(auth);
+          return dispatch(action('UPDATE_USER')({username, auth}));
         }
         return dispatch(action('REMOVE_USER')());
       }
@@ -20,7 +18,7 @@ export const action = createAction({
     return {
       thunk: async(dispatch, getState, { $http, $cookies }) => {
         try {
-          const { data: auth } = await authRepository.with($http).login(username);
+          const { data: auth } = await authRepository.withClient($http).login(username);
           const user = {
             username,
             auth
@@ -38,7 +36,7 @@ export const action = createAction({
       thunk: async(dispatch, getState, { $http, $cookies }) => {
         try {
           const auth = $cookies.get('auth');
-          const { data: username } = await authRepository.with($http).logout(auth);
+          const { data: username } = await authRepository.withClient($http).logout(auth);
           if (username) {
             $cookies.remove('auth');
             return dispatch(action('REMOVE_USER')());
@@ -49,8 +47,8 @@ export const action = createAction({
       }
     };
   },
-  UPDATE_USER: user => ({ payload: { user } }),
-  REMOVE_USER: () => ({ payload: { user: null } })
+  UPDATE_USER: user => ({payload: {user}}),
+  REMOVE_USER: () => ({payload: {user: null}})
 });
 
 const initialState = {
@@ -59,7 +57,7 @@ const initialState = {
 
 export default createReducer(initialState, [
   {
-    types: [ 'UPDATE_USER', 'REMOVE_USER' ],
-    reduce: ({ payload: { user } }, state) => ({ ...state, user })
+    types: [action.type('UPDATE_USER'), action.type('REMOVE_USER')],
+    reduce: ({ payload: { user } }, state) => ({...state, user})
   }
 ]);

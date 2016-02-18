@@ -1,6 +1,8 @@
-import Provider from './Provider';
+import { Provider } from 'reduxible';
 
 export default class CookieProvider extends Provider {
+  static CLIENT_INSTANCE = require('cookie-dough')();
+
   constructor() {
     super();
     this.name = '$cookies';
@@ -12,6 +14,6 @@ export default class CookieProvider extends Provider {
       const Cookies = require('cookie-dough');
       return new Cookies(req);
     }
-    return require('cookie-dough')();
+    return CookieProvider.CLIENT_INSTANCE;
   }
 }
