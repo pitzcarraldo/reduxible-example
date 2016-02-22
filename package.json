@@ -1,6 +1,6 @@
 {
   "name": "reduxible-example",
-  "version": "0.1.0-rc",
+  "version": "0.1.0",
   "description": "Example of The Universal Web Application based on Reduxible.",
   "main": "src/app/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "heroku": "NODE_ENV=heroku node bin/start",
     "start": "node bin/start",
     "dev": "concurrent --kill-others \"npm run dev:client\" \"npm run dev:server\"",
-    "dev:server": "NODE_ENV=development nodemon bin/start",
+    "dev:server": "NODE_ENV=development supervisor -e \"js,scss\" bin/start",
     "dev:client": "rimraf webpack*.json && babel-node webpack/devServer.js"
   },
   "repository": {
@@ -61,8 +61,8 @@
     "json-loader": "^0.5.4",
     "mocha": "^2.3.4",
     "modernizr": "^3.3.1",
+    "monyt": "Pitzcarraldo/monyt#v0.1.0",
     "node-sass": "^3.4.2",
-    "nodemon": "^1.8.1",
     "purecss": "^0.6.0",
     "query-string": "^3.0.0",
     "react": "^0.14.7",
@@ -79,7 +79,7 @@
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.1",
     "redux-simple-router": "^1.0.2",
-    "reduxible": "0.1.0-rc1",
+    "reduxible": "reduxible/reduxible#v0.1.0",
     "respond.js": "^1.4.2",
     "rimraf": "^2.4.4",
     "sass-loader": "^3.1.2",
@@ -89,6 +89,7 @@
     "serve-static": "^1.10.0",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
+    "supervisor": "^0.9.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.11",
     "webpack-dev-middleware": "^1.4.0",

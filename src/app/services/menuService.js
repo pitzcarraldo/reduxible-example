@@ -1,6 +1,6 @@
 import { createReducer, createAction } from 'reduxible';
 
-export const action = createAction('MENU', {
+export const action = createAction('menu', {
   TOGGLE_MENU: menuOpen => ({ payload: { menuOpen } })
 });
 
@@ -10,7 +10,7 @@ const initialState = {
 
 export default createReducer(initialState, [
   {
-    types: [ action.type('TOGGLE_MENU') ],
+    types: [action.type('TOGGLE_MENU')],
     reduce: ({ payload: { menuOpen } }, state) => ({ ...state, menuOpen })
   }
 ]);
