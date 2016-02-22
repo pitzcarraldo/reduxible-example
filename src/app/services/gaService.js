@@ -1,23 +1,21 @@
 import { createReducer } from 'reduxible';
 import { UPDATE_PATH } from 'redux-simple-router';
 import config from '../../config/index';
-import ga from 'react-ga';
+let reducer = reducer = createReducer({}, []);
 
-let reducer;
-
-if (config.server.current) {
-  reducer = createReducer({}, []);
-} else {
+try {
+  const ga = require('react-ga');
   ga.initialize(config.ga.id);
   reducer = createReducer({}, [
     {
-      types: [ UPDATE_PATH ],
+      types: [UPDATE_PATH],
       reduce: ({ payload: { path } }, state) => {
         ga.pageview(path);
         return state;
       }
     }
   ]);
+} catch (error) {
 }
 
 export default reducer;
