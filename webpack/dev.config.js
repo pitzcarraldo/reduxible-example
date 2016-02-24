@@ -8,7 +8,6 @@ module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
-    polyfills: './src/commons/polyfills.js',
     app: [
       'webpack-hot-middleware/client',
       './src/commons/commons.js',

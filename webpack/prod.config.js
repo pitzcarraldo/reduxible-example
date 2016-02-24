@@ -9,7 +9,6 @@ module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
-    polyfills: './src/commons/polyfills.js',
     app: [
       './src/commons/commons.js',
       './src/client.js'

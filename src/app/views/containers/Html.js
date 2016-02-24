@@ -9,13 +9,10 @@ export default class Html extends Component {
     isomorphic: PropTypes.object
   };
 
-  polyfills = (assets) => {
-    return `
-    <!--[if lte IE 8]>
-    <script src="${assets.javascript.polyfills}" charSet="UTF-8"></script>
-    <![endif]-->
-    `.trim();
-  };
+  polyfills = `
+  <!--[if lte IE 8]>
+  <script src="//pitzcarraldo.github.io/react-polyfill/react-polyfill.min.js" charSet="UTF-8"></script>
+  <![endif]-->`;
 
   render() {
     const { component, store, isomorphic } = this.props;
@@ -27,9 +24,9 @@ export default class Html extends Component {
       <head>
         <title>Reduxible Example</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=Edge"/>
         {assets.styles.app && <link href={assets.styles.app} rel="stylesheet" charSet="UTF-8"/>}
-        <meta name="polyfills" dangerouslySetInnerHTML={{ __html: this.polyfills(assets) }} />
+        <meta name="polyfills" dangerouslySetInnerHTML={{ __html: this.polyfills }}/>
         <link rel="shortcut icon" href="/favicon.ico"/>
       </head>
       <body>
