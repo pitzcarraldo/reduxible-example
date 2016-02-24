@@ -20,7 +20,7 @@ export default class Application extends Reduxible {
       ...config,
       container: Html,
       errorContainer: Error,
-      //devTools: config.development ? require('./views/components/DevTools/DevTools') : '',
+      devTools: config.development ? require('./views/components/DevTools/DevTools') : '',
       routes,
       middlewares,
       initialActions,
