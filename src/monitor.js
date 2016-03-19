@@ -23,7 +23,7 @@ const metricses = [
   new MemoryMetrics(),
   new MemoryLeakMetrics(),
   new GarbageCollectionMetrics(),
-  new EventLoopLagMetrics({interval})
+  new EventLoopLagMetrics({ interval })
 ];
 
 export default new Monyt({

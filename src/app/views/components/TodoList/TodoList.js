@@ -58,16 +58,17 @@ export default class TodoList extends Component {
       <div className={styles['todo-list']}>
         <div className="pure-form">
           <input type="text" className="pure-input-rounded" placeholder="Add Todo Here"
-                 value={todo} onChange={this.handleChange}/>
+            value={todo} onChange={this.handleChange}
+          />
           <button className="pure-button-primary" onClick={this.addTodo}>Add</button>
 
           <ul>
             {Object.keys(todos).map(
               (id, key) =>
                 <TodoItem key={key} id={id} todo={todos[id]}
-                          user={user}
-                          removeTodo={this.removeTodo}
-                          toggleTodo={this.toggleTodo}
+                  user={user}
+                  removeTodo={this.removeTodo}
+                  toggleTodo={this.toggleTodo}
                 />
             )}
           </ul>

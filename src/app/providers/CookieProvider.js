@@ -9,7 +9,7 @@ export default class CookieProvider extends Provider {
   }
 
   $get(context = {}) {
-    const {req} = context;
+    const { req } = context;
     if (req) {
       const Cookies = require('cookie-dough');
       return new Cookies(req);

@@ -24,6 +24,7 @@ export const action = createAction('auth', {
         return dispatch(action('UPDATE_USER')(user));
       } catch (error) {
         console.log(error);
+        return dispatch(action('REMOVE_USER')());
       }
     }
   }),
@@ -34,10 +35,11 @@ export const action = createAction('auth', {
         const { data: username } = await authRepository.withClient($http).logout(auth);
         if (username) {
           $cookies.remove('auth');
-          return dispatch(action('REMOVE_USER')());
         }
+        return dispatch(action('REMOVE_USER')());
       } catch (error) {
         console.log(error);
+        return dispatch(action('REMOVE_USER')());
       }
     }
   }),

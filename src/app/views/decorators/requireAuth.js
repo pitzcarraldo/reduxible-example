@@ -10,10 +10,6 @@ export default function requireAuth(ComposedComponent) {
       push: PropTypes.func.isRequired
     };
 
-    constructor(props) {
-      super(props);
-    }
-
     componentWillMount() {
       this.handleAuth(this.props);
     }
@@ -35,5 +31,5 @@ export default function requireAuth(ComposedComponent) {
       );
     }
   }
-  return connect(state =>({ user: state.auth.user }), { push: pushPath })(AuthComponent);
+  return connect(state => ({ user: state.auth.user }), { push: pushPath })(AuthComponent);
 }

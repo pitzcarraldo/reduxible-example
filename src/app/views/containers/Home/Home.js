@@ -57,16 +57,16 @@ export default class Home extends Component {
         <h2 className="content-subhead">Webpack Isomorphic Image Loader Samples</h2>
         <div className="pure-g">
           <div className="pure-u-1-4">
-            <img className="pure-img-responsive" src={lake} alt="Peyto Lake"/>
+            <img className="pure-img-responsive" src={lake} alt="Peyto Lake" />
           </div>
           <div className="pure-u-1-4">
-            <img className="pure-img-responsive" src={train} alt="Train"/>
+            <img className="pure-img-responsive" src={train} alt="Train" />
           </div>
           <div className="pure-u-1-4">
-            <img className="pure-img-responsive" src={tshirts} alt="T-Shirt Store"/>
+            <img className="pure-img-responsive" src={tshirts} alt="T-Shirt Store" />
           </div>
           <div className="pure-u-1-4">
-            <img className="pure-img-responsive" src={mountain} alt="Mountain"/>
+            <img className="pure-img-responsive" src={mountain} alt="Mountain" />
           </div>
         </div>
       </div>);

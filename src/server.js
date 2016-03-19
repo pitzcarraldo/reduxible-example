@@ -8,7 +8,7 @@ import config from './config/index';
 import { Application } from './app/index';
 import monitor from './monitor';
 import api from './api/index';
-export default function(isomorphic) {
+export default function (isomorphic) {
   const app = new Application({
     server: true,
     development: config.development,

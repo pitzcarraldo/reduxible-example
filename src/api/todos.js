@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   if (req.body && req.body.todos) {
-    Object.keys(req.body.todos).forEach((id)=> {
+    Object.keys(req.body.todos).forEach((id) => {
       todos[id] = { ...todos[id], ...req.body.todos[id] };
     });
   }

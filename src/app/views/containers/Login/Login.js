@@ -34,7 +34,7 @@ export default class Login extends Component {
   handleAuth(props) {
     const { user, push } = props;
     if (user) {
-      push(`/profile`);
+      push('/profile');
     }
   }
 
@@ -54,8 +54,10 @@ export default class Login extends Component {
         <div className="pure-g-valign-fix">
           <h2 className="content-subhead">Login</h2>
           <div className="pure-form">
-            <input type="text" className="pure-input-rounded" placeholder="User Name Here" value={username}
-                   onChange={this.handleUserName}/>
+            <input type="text"
+              className="pure-input-rounded" placeholder="User Name Here" value={username}
+              onChange={this.handleUserName}
+            />
             <button className="pure-button-primary" onClick={this.handleLogin}>Login</button>
           </div>
         </div>

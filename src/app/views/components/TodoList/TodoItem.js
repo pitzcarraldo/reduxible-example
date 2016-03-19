@@ -23,11 +23,13 @@ export default class TodoItem extends Component {
     const self = this.self(user, todo.user);
     return (
       <li className={cx('todo-item', { 'todo-item-complete': todo.complete })}>
-        <span data-id={id} onClick={self && toggleTodo}>{`${todo.user.username || 'Anonymous'}: ${todo.text}`}</span>
+        <span data-id={id} onClick={self && toggleTodo}>
+          {`${todo.user.username || 'Anonymous'}: ${todo.text}`}
+        </span>
         {self &&
         <button className={cx('todo-item-remove', 'pure-button')}
-                data-id={id} onClick={removeTodo}>X
-        </button>
+          data-id={id} onClick={removeTodo}
+        >X</button>
         }
       </li>
     );

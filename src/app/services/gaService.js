@@ -1,7 +1,7 @@
 import { createReducer } from 'reduxible';
 import { UPDATE_PATH } from 'redux-simple-router';
 import config from '../../config/index';
-let reducer = reducer = createReducer({}, []);
+let reducer = createReducer({}, []);
 
 try {
   const ga = require('react-ga');

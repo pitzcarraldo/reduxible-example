@@ -7,15 +7,15 @@ export default class AuthRepository extends Repository {
   }
 
   findUserByAuth(auth) {
-    return this.client.post(this.api() + '/user', {data: {auth}});
+    return this.client.post(`${this.api()}/user`, { data: { auth } });
   }
 
   login(username) {
-    return this.client.post(this.api() + '/login', {data: {username}});
+    return this.client.post(`${this.api()}/login`, { data: { username } });
   }
 
   logout(auth) {
-    return this.client.post(this.api() + '/logout', {data: {auth}});
+    return this.client.post(`${this.api()}/logout`, { data: { auth } });
   }
 }
 

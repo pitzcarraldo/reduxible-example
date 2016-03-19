@@ -17,7 +17,7 @@ export default class TodoRepository extends Repository {
   }
 
   remove(id) {
-    return this.client.delete(this.api() + `/${id}`);
+    return this.client.delete(`${this.api()}/${id}`);
   }
 }
 

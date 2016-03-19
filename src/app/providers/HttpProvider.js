@@ -4,13 +4,16 @@ import { Provider } from 'reduxible';
 export class HttpClient {
   constructor(req) {
     ['get', 'post', 'put', 'patch', 'delete'].forEach(
-      method => this[method] = (url, config = {}) => {
-        config.method = method;
-        if (req && req.get && req.get('cookie')) {
-          config.headers = config.headers || {};
-          config.headers.cookie = req.get('cookie');
-        }
-        return axios(url, config);
+      method => {
+        this[method] = (url, options = {}) => {
+          const config = { ...options };
+          config.method = method;
+          if (req && req.get && req.get('cookie')) {
+            config.headers = config.headers || {};
+            config.headers.cookie = req.get('cookie');
+          }
+          return axios(url, config);
+        };
       }
     );
   }
