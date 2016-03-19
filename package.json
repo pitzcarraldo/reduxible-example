@@ -87,7 +87,7 @@
     "webpack-querify": "^0.0.1"
   },
   "engines": {
-    "node": "4.x",
+    "node": "5.x",
     "npm": "3.x"
   }
 }
