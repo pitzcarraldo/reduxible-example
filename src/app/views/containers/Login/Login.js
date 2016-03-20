@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { action } from '../../../services/authService';
-import { pushPath } from 'redux-simple-router';
+import { push } from 'react-router-redux';
 
 @connect(
   state => ({
@@ -10,7 +10,7 @@ import { pushPath } from 'redux-simple-router';
   {
     loadAuth: action('LOAD_AUTH'),
     login: action('LOGIN'),
-    push: pushPath
+    push
   }
 )
 export default class Login extends Component {
@@ -23,7 +23,7 @@ export default class Login extends Component {
     username: ''
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.handleAuth(this.props);
   }
 
@@ -32,9 +32,8 @@ export default class Login extends Component {
   }
 
   handleAuth(props) {
-    const { user, push } = props;
-    if (user) {
-      push('/profile');
+    if (props.user) {
+      props.push('/profile');
     }
   }
 

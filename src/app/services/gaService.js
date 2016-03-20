@@ -1,5 +1,5 @@
 import { createReducer } from 'reduxible';
-import { UPDATE_PATH } from 'redux-simple-router';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import config from '../../config/index';
 let reducer = createReducer({}, []);
 
@@ -8,7 +8,7 @@ try {
   ga.initialize(config.ga.id);
   reducer = createReducer({}, [
     {
-      types: [UPDATE_PATH],
+      types: [LOCATION_CHANGE],
       reduce: ({ payload: { path } }, state) => {
         ga.pageview(path);
         return state;

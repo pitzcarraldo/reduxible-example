@@ -1,4 +1,4 @@
-import { Provider } from 'reduxible';
+import { Provider } from 'redux-provider-middleware';
 
 export default class CookieProvider extends Provider {
   static CLIENT_INSTANCE = require('cookie-dough')();

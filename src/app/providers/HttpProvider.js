@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Provider } from 'reduxible';
+import { Provider } from 'redux-provider-middleware';
 
 export class HttpClient {
   constructor(req) {

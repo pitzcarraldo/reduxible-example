@@ -1,5 +1,5 @@
 import providers from '../providers/index';
-import { providerMiddleware } from 'reduxible';
+import providerMiddleware from 'redux-provider-middleware';
 
 export default [
   providerMiddleware(...providers)
