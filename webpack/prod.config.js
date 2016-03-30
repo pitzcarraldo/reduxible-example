@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var strip = require('strip');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var isomorphic = require('./isomorphic').plugin;
 var $q = require('webpack-querify');
@@ -25,7 +24,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [strip.loader('debug'), 'babel', 'eslint']
+        loaders: ['strip?strip[]=debug,strip[]=console.log', 'babel', 'eslint']
       },
       {
         test: /\.json$/,
