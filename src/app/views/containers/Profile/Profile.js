@@ -1,18 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import connector from './Profile.connector';
 import requireAuth from '../../decorators/requireAuth';
-import { connect } from 'react-redux';
-import { action as authAction } from '../../../services/authService';
 
-
-@connect(
-  state =>
-    ({
-      user: state.auth.user
-    }),
-  {
-    logout: authAction('LOGOUT')
-  }
-)
+@connector
 @requireAuth
 export default class Profile extends Component {
   static propTypes = {

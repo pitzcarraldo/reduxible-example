@@ -1,18 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { action } from '../../../services/authService';
-import { push } from 'react-router-redux';
+import connector from './Login.connector';
 
-@connect(
-  state => ({
-    user: state.auth.user
-  }),
-  {
-    loadAuth: action('LOAD_AUTH'),
-    login: action('LOGIN'),
-    push
-  }
-)
+@connector
 export default class Login extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired,

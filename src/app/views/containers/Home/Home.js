@@ -1,12 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { action } from '../../../services/homeService';
+import connector from './Home.connector';
 
-@connect(state => ({
-  content: state.home.content
-}), {
-  loadContent: action('LOAD_CONTENT')
-})
+@connector
 export default class Home extends Component {
   static propTypes = {
     content: PropTypes.array,
@@ -14,8 +9,7 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    const { loadContent } = this.props;
-    loadContent();
+    this.props.loadContent();
   }
 
   render() {

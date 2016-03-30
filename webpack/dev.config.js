@@ -25,11 +25,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [$q({'babel': babelConfig})]
+        loader: $q({'babel': babelConfig, 'eslint': {}})
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json'
       },
       {
         test: /\.(css|scss)/,
@@ -71,7 +71,7 @@ module.exports = {
       },
       {
         test: isomorphic.regular_expression('images'),
-        loader: 'url-loader',
+        loader: 'url',
         query: {
           limit: 10240
         }

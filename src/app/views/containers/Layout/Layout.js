@@ -1,24 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Header, Footer, Nav } from '../../components/index';
-import { action as menuAction } from '../../../services/menuService';
-import { action as authAction } from '../../../services/authService';
+import connector from './Layout.connector';
 
-@connect(
-  state =>
-    ({
-      path: state.routing.path,
-      menuOpen: state.menu.menuOpen
-    }),
-  {
-    loadAuth: authAction('LOAD_AUTH'),
-    toggleMenu: menuAction('TOGGLE_MENU')
-  }
-)
+@connector
 export default class Layout extends Component {
   static propTypes = {
     children: PropTypes.object,
+    path: PropTypes.string,
     menuOpen: PropTypes.bool,
+    user: PropTypes.object,
     loadAuth: PropTypes.func,
     toggleMenu: PropTypes.func
   };
@@ -34,11 +24,11 @@ export default class Layout extends Component {
   };
 
   render() {
-    const { menuOpen } = this.props;
+    const { menuOpen, user } = this.props;
     const active = menuOpen ? 'active' : '';
     return (
-      <div id="layout" className={active}>
-        <Nav active={active} toggleMenu={this.toggleMenu} />
+      <div id="layout!" className={active}>
+        <Nav active={active} toggleMenu={this.toggleMenu} user={user} />
         <Header />
         {this.props.children}
         <Footer />

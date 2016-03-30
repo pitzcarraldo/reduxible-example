@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
 import { IndexLink, Link } from 'react-router';
-import { connect } from 'react-redux';
 
 export default function Nav({ active, toggleMenu, user }) {
   return (
     <div>
       <a href="#menu" id="menuLink" className={`menu-link ${active}`} onClick={toggleMenu}>
-        <span></span>
+        <span />
       </a>
       <div id="menu" className={active}>
         <div className="pure-menu">
@@ -48,10 +47,3 @@ Nav.propTypes = {
   toggleMenu: PropTypes.func,
   user: PropTypes.object
 };
-
-export default connect(
-  state =>
-    ({
-      user: state.auth.user
-    })
-)(Nav);
