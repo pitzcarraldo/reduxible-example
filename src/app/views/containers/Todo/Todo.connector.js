@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { action } from '../../../services/todoService';
+import { getTodo, addTodo, toggleTodo, removeTodo } from '../../../services/todoService';
 
 export default connect(
   state => ({
@@ -7,9 +7,9 @@ export default connect(
     user: state.auth.user
   }),
   {
-    getTodo: action('GET_TODO'),
-    addTodo: action('ADD_TODO'),
-    toggleTodo: action('TOGGLE_TODO'),
-    removeTodo: action('REMOVE_TODO')
+    getTodo,
+    addTodo,
+    toggleTodo,
+    removeTodo
   }
 );

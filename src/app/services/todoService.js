@@ -1,52 +1,61 @@
-import { createReducer, createAction } from 'reduxible';
-import { todoRepository } from '../repositories/TodoRepository';
+import todoApi from '../apis/todoApis';
 
-export const action = createAction('todo', {
-  GET_TODO: () => ({
-    thunk: async(dispatch, getState, { $http }) => {
-      const { data: todos } = await todoRepository.withClient($http).findAll();
-      return dispatch(action('UPDATE_TODOS')(todos));
-    }
-  }),
-  ADD_TODO: text => ({
-    thunk: async(dispatch, getState, { $http }) => {
-      const user = getState().auth.user || {};
-      const todo = {};
-      todo[new Date().getTime()] = {
-        user,
-        text,
-        complete: false
-      };
-      const { data: todos } = await todoRepository.withClient($http).save(todo);
-      return dispatch(action('UPDATE_TODOS')(todos));
-    }
-  }),
-  TOGGLE_TODO: id => ({
-    thunk: async(dispatch, getState, { $http }) => {
-      const todo = {};
-      const currentTodo = getState().todo.todos[id];
-      todo[id] = { complete: !currentTodo.complete };
-      const { data: todos } = await todoRepository.withClient($http).save(todo);
-      return dispatch(action('UPDATE_TODOS')(todos));
-    }
-  }),
-  REMOVE_TODO: id => ({
-    thunk: async(dispatch, getState, { $http }) => {
-      const { data: todos } = await todoRepository.withClient($http).remove(id);
-      return dispatch(action('UPDATE_TODOS')(todos));
-    }
-  }),
-  UPDATE_TODOS: todos => ({ payload: { todos } })
+export const UPDATE_TODOS = 'todo/UPDATE_TODOS';
+
+function updateTodo(todos) {
+  return {
+    type: UPDATE_TODOS,
+    payload: { todos }
+  };
 }
-);
 
 const initialState = {
   todos: {}
 };
 
-export default createReducer(initialState, [
-  {
-    types: [action.type('UPDATE_TODOS')],
-    reduce: ({ payload: { todos } }, state) => ({ ...state, todos })
+export default function reducer(state = initialState, { type, payload }) {
+  switch (type) {
+    case UPDATE_TODOS:
+      return { ...state, todos: payload.todos };
+    default:
+      return state;
   }
-]);
+}
+
+export function getTodo() {
+  return async({ $http }) => {
+    const { data: todos } = await $http.request(todoApi.findAll());
+    return updateTodo(todos);
+  };
+}
+
+export function addTodo(text) {
+  return ({ $http }) => async(dispatch, getState) => {
+    const user = getState().auth.user || {};
+    const todo = {};
+    todo[new Date().getTime()] = {
+      user,
+      text,
+      complete: false
+    };
+    const { data: todos } = await $http.request(todoApi.save(todo));
+    return dispatch(updateTodo(todos));
+  };
+}
+
+export function toggleTodo(id) {
+  return ({ $http }) => async(dispatch, getState) => {
+    const todo = {};
+    const currentTodo = getState().todo.todos[id];
+    todo[id] = { complete: !currentTodo.complete };
+    const { data: todos } = await $http.request(todoApi.save(todo));
+    return dispatch(updateTodo(todos));
+  };
+}
+
+export function removeTodo(id) {
+  return async({ $http }) => {
+    const { data: todos } = await $http.request(todoApi.remove(id));
+    return updateTodo(todos);
+  };
+}

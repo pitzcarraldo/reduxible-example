@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { action as authAction } from '../../../services/authService';
+import { logout } from '../../../services/authService';
 
 
 export default connect(
@@ -8,6 +8,6 @@ export default connect(
       user: state.auth.user
     }),
   {
-    logout: authAction('LOGOUT')
+    logout
   }
 );

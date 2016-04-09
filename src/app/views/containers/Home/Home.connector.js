@@ -1,10 +1,16 @@
 import { connect } from 'react-redux';
-import { action } from '../../../services/homeService';
+import { loadContent } from '../../../services/homeService';
+import { initialActions } from 'reduxible';
 
-export default connect(
+const initAction = initialActions(loadContent());
+const connector = connect(
   state => ({
     content: state.home.content
   }), {
-    loadContent: action('LOAD_CONTENT')
+    loadContent
   }
 );
+
+export default function (Component) {
+  return initAction(connector(Component));
+}

@@ -1,16 +1,21 @@
-import { createReducer, createAction } from 'reduxible';
+export const TOGGLE_MENU = 'menu/TOGGLE_MENU';
 
-export const action = createAction('menu', {
-  TOGGLE_MENU: menuOpen => ({ payload: { menuOpen } })
-});
+export function toggleMenu(menuOpen) {
+  return {
+    type: TOGGLE_MENU,
+    payload: { menuOpen }
+  };
+}
 
 const initialState = {
   menuOpen: false
 };
 
-export default createReducer(initialState, [
-  {
-    types: [action.type('TOGGLE_MENU')],
-    reduce: ({ payload: { menuOpen } }, state) => ({ ...state, menuOpen })
+export default function reducer(state = initialState, { type, payload }) {
+  switch (type) {
+    case TOGGLE_MENU:
+      return { ...state, menuOpen: payload.menuOpen };
+    default:
+      return state;
   }
-]);
+}

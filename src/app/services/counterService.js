@@ -1,16 +1,19 @@
-import { createReducer, createAction } from 'reduxible';
-
-export const action = createAction('counter', {
-  INCREMENT: {}
-});
+export const INCREMENT = 'counter/INCREMENT';
+export function increment() {
+  return {
+    type: INCREMENT
+  };
+}
 
 const initialState = {
   count: 0
 };
 
-export default createReducer(initialState, [
-  {
-    types: [action.type('INCREMENT')],
-    reduce: ({ payload }, state) => ({ ...state, count: state.count + 1 })
+export default function reducer(state = initialState, { type }) {
+  switch (type) {
+    case INCREMENT:
+      return { ...state, count: state.count + 1 };
+    default:
+      return state;
   }
-]);
+}

@@ -1,20 +1,20 @@
-import { createReducer } from 'reduxible';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import config from '../../config/index';
-let reducer = createReducer({}, []);
+
+let reducer = (state = {}) => state;
 
 try {
   const ga = require('react-ga');
   ga.initialize(config.ga.id);
-  reducer = createReducer({}, [
-    {
-      types: [LOCATION_CHANGE],
-      reduce: ({ payload: { path } }, state) => {
-        ga.pageview(path);
+  reducer = (state = {}, { type, payload }) => {
+    switch (type) {
+      case LOCATION_CHANGE :
+        ga.pageview(payload.path);
         return state;
-      }
+      default:
+        return state;
     }
-  ]);
+  };
 } catch (error) {
   console.log(error);
 }

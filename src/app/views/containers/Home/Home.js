@@ -9,7 +9,7 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    this.props.loadContent();
+    this.props.loadContent(); // comment
   }
 
   render() {
@@ -65,4 +65,5 @@ export default class Home extends Component {
         </div>
       </div>);
   }
+
 }
