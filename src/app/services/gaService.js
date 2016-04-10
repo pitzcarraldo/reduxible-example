@@ -9,7 +9,7 @@ try {
   reducer = (state = {}, { type, payload }) => {
     switch (type) {
       case LOCATION_CHANGE :
-        ga.pageview(payload.path);
+        ga.pageview(payload.pathname);
         return state;
       default:
         return state;

@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Header, Footer, Nav } from '../../components/index';
-import connector from './Layout.connector';
+import connector, { initializer } from './Layout.connector';
 
+@initializer
 @connector
 export default class Layout extends Component {
   static propTypes = {
