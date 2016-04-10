@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { TodoList } from '../../components/index';
-import connector from './Todo.connector';
+import connector, { initializer } from './Todo.connector';
 
+@initializer
 @connector
 export default class Todo extends Component {
   static propTypes = {

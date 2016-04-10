@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import connector from './Home.connector';
+import connector, { initializer } from './Home.connector';
 
+@initializer
 @connector
 export default class Home extends Component {
   static propTypes = {
@@ -9,7 +10,7 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    this.props.loadContent(); // comment
+    this.props.loadContent();
   }
 
   render() {
@@ -65,5 +66,4 @@ export default class Home extends Component {
         </div>
       </div>);
   }
-
 }

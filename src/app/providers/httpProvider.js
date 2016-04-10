@@ -5,7 +5,7 @@ function getBaseUrl() {
   const protocol = config.server.current ? 'http:' : '';
   const port = config.api.port ? `:${config.api.port}` : '';
   const apiServer = config.server.current ? `${protocol}//${config.api.host}${port}` : '';
-  return `${protocol}${apiServer}/api`;
+  return `${apiServer}/api`;
 }
 
 const BASE_URL = getBaseUrl();
