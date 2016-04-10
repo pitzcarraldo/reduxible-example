@@ -5,14 +5,6 @@ import routes from './routes';
 import middlewares from './middlewares/index';
 import reducers from './services/reducers';
 
-function reloader(store) {
-  if (module.hot) {
-    module.hot.accept('./services/reducers', () => {
-      store.replaceReducer(require('./services/reducers'));
-    });
-  }
-}
-
 export default class Application extends Reduxible {
   constructor(config) {
     super({
@@ -23,7 +15,13 @@ export default class Application extends Reduxible {
       routes,
       middlewares,
       reducers,
-      reloader,
+      reloader(store) {
+        if (module.hot) {
+          module.hot.accept('./services/reducers', () => {
+            store.replaceReducer(require('./services/reducers'));
+          });
+        }
+      },
       extras: config.extras
     });
   }
