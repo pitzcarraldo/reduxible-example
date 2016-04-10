@@ -1,10 +1,10 @@
 import Reduxible from 'reduxible';
+import devTools from 'reduxible-devtools';
 import Html from './containers/Html';
 import Error from './containers/Error/Error';
 import routes from './routes';
 import middlewares from './middlewares/index';
 import reducers from './services/reducers';
-import loadDevTools from './components/DevTools/loadDevTools';
 
 export default class Application extends Reduxible {
   constructor(config) {
@@ -12,7 +12,7 @@ export default class Application extends Reduxible {
       ...config,
       container: Html,
       errorContainer: Error,
-      devTools: loadDevTools(config.development),
+      devTools: devTools(config.development),
       routes,
       middlewares,
       reducers,
