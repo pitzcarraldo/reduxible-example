@@ -1,11 +1,11 @@
-import Layout from './views/containers/Layout/Layout';
-import About from './views/containers/About/About';
-import Counter from './views/containers/Counter/Counter';
-import Todo from './views/containers/Todo/Todo';
-import Home from './views/containers/Home/Home';
-import Login from './views/containers/Login/Login';
-import Profile from './views/containers/Profile/Profile';
-import NotFound from './views/containers/NotFound/NotFound';
+import Layout from './containers/Layout/Layout';
+import About from './containers/About/About';
+import Counter from './containers/Counter/Counter';
+import Todo from './containers/Todo/Todo';
+import Home from './containers/Home/Home';
+import Login from './containers/Login/Login';
+import Profile from './containers/Profile/Profile';
+import NotFound from './containers/NotFound/NotFound';
 
 export default [
   {

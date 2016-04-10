@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { increment } from '../../../services/counterService';
+import { increment } from '../../services/counterService';
 
 export default connect(
   state => ({

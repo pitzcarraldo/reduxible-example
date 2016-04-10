@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { loadContent } from '../../../services/homeService';
+import { loadContent } from '../../services/homeService';
 import { initialActions } from 'reduxible';
 
 export const initializer = initialActions(loadContent());
