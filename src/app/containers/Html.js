@@ -2,11 +2,12 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 
-export default function Html({ component, state = {}, isomorphic }) {
+export default function Html({ component, store = {}, isomorphic }) {
   const polyfills = `<!--[if lte IE 8]>
 <script src="//pitzcarraldo.github.io/react-polyfill/react-polyfill.min.js" charSet="UTF-8">
 </script>
 <![endif]-->`;
+  const state = store && store.getState && store.getState();
   const assets = isomorphic.assets();
   const content = component ? ReactDOM.renderToString(component) : '';
   return (
@@ -33,6 +34,6 @@ export default function Html({ component, state = {}, isomorphic }) {
 
 Html.propTypes = {
   component: PropTypes.node,
-  state: PropTypes.object,
+  store: PropTypes.object,
   isomorphic: PropTypes.object
 };

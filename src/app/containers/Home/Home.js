@@ -3,15 +3,11 @@ import connector, { initializer } from './Home.connector';
 
 @initializer
 @connector
-export default class Home extends Component {
+export default class Home extends Component { // eslint-disable-line
   static propTypes = {
     content: PropTypes.array,
     loadContent: PropTypes.func
   };
-
-  componentDidMount() {
-    this.props.loadContent();
-  }
 
   render() {
     const { content } = this.props;
